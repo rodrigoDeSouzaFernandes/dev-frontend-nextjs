@@ -26,9 +26,9 @@ export default function ProductCard({
   product: { title, description, image, price },
 }: ProductCardProps) {
   return (
-    <Card className="sm:w-80 relative grid grid-rows-[1fr_auto_auto] ">
+    <Card className="relative grid grid-rows-[1fr_auto_auto] ">
       <CardHeader className="flex-1 ">
-        <CardTitle title={title} className="mr-4 line-clamp-1">
+        <CardTitle title={title} className="mr-4 sm:line-clamp-1">
           {title}
         </CardTitle>
         <CardDescription className="line-clamp-3">
@@ -54,7 +54,7 @@ export default function ProductCard({
         </DropdownMenu>
       </div>
       <CardContent className="mt-auto">
-        <img className="h-60 m-auto" src={image} alt={`Image of ${title}`} />
+        <img className="min-h-40 max-h-60 h-[100%] sm:h-60 m-auto object-contain" src={image} alt={`Image of ${title}`} />
         <p className="w-full text-right  mt-6">
           Price:{" "}
           <span className="font-semibold text-xl text-right ">R$ {price}</span>
