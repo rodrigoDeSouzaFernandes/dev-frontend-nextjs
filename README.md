@@ -1,89 +1,36 @@
-# 🧪 Desafio Técnico – Front-End (Next.js)
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## 🎯 Objetivo
+## Getting Started
 
-Criar uma aplicação web com **Next.js** e **TypeScript** que implemente um **CRUD de produtos**, utilizando a [FakeStore API](https://fakestoreapi.com/).
+First, run the development server:
 
----
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## 📦 API a ser utilizada
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Use os seguintes endpoints da FakeStore API:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- `GET /products` – listar produtos  
-- `GET /products/:id` – visualizar detalhes  
-- `POST /products` – criar novo produto  
-- `PUT /products/:id` – editar produto  
-- `DELETE /products/:id` – deletar produto  
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-> ⚠️ A API é pública e os dados não são persistidos de verdade.
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## ✅ Funcionalidades
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Obrigatórias
-- **Listagem** de produtos
-- **Visualização** de um produto
-- **Criação** de novo produto
-- **Edição** de produto existente
-- **Exclusão** de produto
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Não obrigatórias
-- Tela de **login fake** com e-mail e senha fixos
-- **Menu lateral (sidebar)** responsivo
-- Layout **totalmente responsivo** (mobile e desktop)
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## 🔧 Requisitos técnicos obrigatórios
-
-- [x] Next.js com TypeScript
-- [x] React Hooks
-- [x] Integração com a FakeStore API
-- [x] Tailwind CSS para estilização
-- [x] Código bem organizado e componentizado
-- [x] Git com histórico de commits claros
-- [x] README com instruções de como rodar
-
----
-
-## 🌟 Diferenciais (pontos positivos)
-
-- Uso do **shadcn-ui**
-- Deploy funcional na **Vercel**
-- Feedbacks de carregamento, sucesso e erro
-- Testes com **Jest** ou **React Testing Library**
-
----
-
-## 📥 Como iniciar
-
-1. Faça um **fork** deste repositório.
-2. Trabalhe no seu fork normalmente, fazendo commits e push a cada evolução.
-3. Mantenha o repositório **público** para avaliação.
-
----
-
-## 📤 Entrega
-
-1. Envie o **link do seu fork** para a equipe de recrutamento.
-2. Certifique-se de que o `README.md` inclui:
-   - ✅ Como rodar o projeto localmente
-   - ✅ Link para o deploy (caso tenha publicado)
-
----
-
-## 💡 Avaliação
-
-Serão avaliados os seguintes pontos:
-
-- Qualidade da interface (UX/UI)
-- Qualidade do código e clareza
-- Organização das pastas e boas práticas
-- Responsividade e experiência do usuário
-- Uso correto de Git (commits, mensagens e histórico)
-
----
-
-Boa sorte e bom código! 🚀
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
