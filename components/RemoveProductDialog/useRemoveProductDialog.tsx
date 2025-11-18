@@ -2,7 +2,11 @@ import { productsService } from "@/lib/services/products.service";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-const useRemoveProductDialog = () => {
+type UseRemoveProductDialogProps = {
+  closeModal: () => void;
+};
+
+const useRemoveProductDialog = (props: UseRemoveProductDialogProps) => {
   const {
     isPending,
     isError,
@@ -11,6 +15,7 @@ const useRemoveProductDialog = () => {
     mutationFn: productsService.delete,
     onSuccess: () => {
       toast.success("Product deleted successfully.");
+      props.closeModal();
     },
   });
 

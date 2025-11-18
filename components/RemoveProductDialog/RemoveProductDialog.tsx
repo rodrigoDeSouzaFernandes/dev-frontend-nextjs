@@ -15,9 +15,12 @@ import useRemoveProductDialog from "./useRemoveProductDialog";
 import { AlertTriangle, LoaderIcon } from "lucide-react";
 import { Alert, AlertDescription } from "../ui/alert";
 import { RemoveProductDialogProps } from "@/types/products.dialogs";
+import { useModalStore } from "@/stores/useModalStore";
 
 function RemoveProductDialog({ productId }: RemoveProductDialogProps) {
-  const { isPending, isError, deleteProduct } = useRemoveProductDialog();
+    
+    const closeModal = useModalStore((state) => state.closeModal);
+    const { isPending, isError, deleteProduct } = useRemoveProductDialog({closeModal});
 
   return (
     <AlertDialog open={true}>
@@ -39,10 +42,7 @@ function RemoveProductDialog({ productId }: RemoveProductDialogProps) {
           )}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel
-            className="cursor-pointer"
-            onClick={() => {}}
-          >
+          <AlertDialogCancel className="cursor-pointer" onClick={closeModal}>
             Cancel
           </AlertDialogCancel>
 
