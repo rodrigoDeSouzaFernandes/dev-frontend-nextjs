@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Card,
   CardAction,
@@ -27,14 +26,18 @@ export default function ProductCard({
   product: { title, description, image, price },
 }: ProductCardProps) {
   return (
-    <Card className="sm:w-80">
-      <div className="flex w-full gap-1 p-3">
-        <CardHeader className="flex-1">
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
-          <CardAction></CardAction>
-        </CardHeader>
+    <Card className="relative grid grid-rows-[1fr_auto_auto] ">
+      <CardHeader className="flex-1 ">
+        <CardTitle title={title} className="mr-4 sm:line-clamp-1">
+          {title}
+        </CardTitle>
+        <CardDescription className="line-clamp-3">
+          {description}
+        </CardDescription>
+        <CardAction></CardAction>
+      </CardHeader>
 
+      <div className="absolute top-0 right-0 m-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="cursor-pointer">
             <Button variant="ghost" size="icon">
@@ -45,13 +48,13 @@ export default function ProductCard({
             align="end"
             className="bg-popover text-popover-foreground border border-border rounded-md shadow-md w-30 cursor-pointer"
           >
-            <DropdownMenuItem className="p-2">Edit</DropdownMenuItem>
-            <DropdownMenuItem className="p-2">Delete</DropdownMenuItem>
+            <DropdownMenuItem className="p-2 hover:bg-gray-100">Edit</DropdownMenuItem>
+            <DropdownMenuItem className="p-2 hover:bg-red-50 hover:text-red-600">Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <CardContent>
-        <img src={image} alt={`Image of ${title}`} />
+      <CardContent className="mt-auto">
+        <img className="min-h-40 max-h-60 h-[100%] sm:h-60 m-auto object-contain" src={image} alt={`Image of ${title}`} />
         <p className="w-full text-right  mt-6">
           Price:{" "}
           <span className="font-semibold text-xl text-right ">R$ {price}</span>
