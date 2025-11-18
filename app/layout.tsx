@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { QueryProvider } from "./providers";
 import "./globals.css";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <Header />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

@@ -48,8 +48,8 @@ export default function ProductCard({
             align="end"
             className="bg-popover text-popover-foreground border border-border rounded-md shadow-md w-30 cursor-pointer"
           >
-            <DropdownMenuItem className="p-2">Edit</DropdownMenuItem>
-            <DropdownMenuItem className="p-2">Delete</DropdownMenuItem>
+            <DropdownMenuItem className="p-2 hover:bg-gray-100">Edit</DropdownMenuItem>
+            <DropdownMenuItem className="p-2 hover:bg-red-50 hover:text-red-600">Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
