@@ -14,22 +14,13 @@ import {
 import useRemoveProductDialog from "./useRemoveProductDialog";
 import { AlertTriangle, LoaderIcon } from "lucide-react";
 import { Alert, AlertDescription } from "../ui/alert";
+import { RemoveProductDialogProps } from "@/types/products.dialogs";
 
-type RemoveProductDialogProps = {
-  productId: number;
-  open: boolean;
-  setOpen: (open: boolean) => void;
-};
-
-function RemoveProductDialog({
-  productId,
-  open,
-  setOpen,
-}: RemoveProductDialogProps) {
+function RemoveProductDialog({ productId }: RemoveProductDialogProps) {
   const { isPending, isError, deleteProduct } = useRemoveProductDialog();
 
   return (
-    <AlertDialog open={open}>
+    <AlertDialog open={true}>
       <AlertDialogContent className="max-w-sm">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -50,7 +41,7 @@ function RemoveProductDialog({
         <AlertDialogFooter>
           <AlertDialogCancel
             className="cursor-pointer"
-            onClick={() => setOpen(false)}
+            onClick={() => {}}
           >
             Cancel
           </AlertDialogCancel>

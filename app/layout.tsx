@@ -4,6 +4,7 @@ import { QueryProvider } from "./providers";
 import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
+import ModalRoot from "@/components/ModalRoot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,11 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
+          <ModalRoot />
           <Toaster />
           <Header />
           {children}
         </QueryProvider>
-        <div id="modal-root"></div>
       </body>
     </html>
   );

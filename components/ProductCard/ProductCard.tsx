@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardAction,
@@ -17,7 +19,8 @@ import {
 } from "../ui/dropdown-menu";
 
 import { Product } from "@/types/products";
-import { Spinner } from "../ui/spinner";
+import { useModalStore } from "@/stores/useModalStore";
+import { use } from "react";
 
 type ProductCardProps = {
   product: Product;
@@ -26,6 +29,8 @@ type ProductCardProps = {
 export default function ProductCard({
   product: { title, description, image, price },
 }: ProductCardProps) {
+  const openModal = useModalStore(state => state.openModal);
+
   return (
     <Card className="relative grid grid-rows-[1fr_auto_auto] ">
       <CardHeader className="flex-1 ">
@@ -52,7 +57,12 @@ export default function ProductCard({
             <DropdownMenuItem className="p-2 hover:bg-gray-100">
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem className="p-2 hover:bg-red-50 hover:text-red-600">
+            <DropdownMenuItem
+              className="p-2 hover:bg-red-50 hover:text-red-600"
+              onClick={() => {
+                openModal("removeProduct", { productId: 5 });
+              }}
+            >
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
