@@ -1,18 +1,9 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@radix-ui/react-dialog";
+"use client";
 import React from "react";
-import { Button } from "../ui/button";
-import { DialogHeader } from "../ui/dialog";
-import { Label } from "@radix-ui/react-dropdown-menu";
 
+import { Button } from "../ui/button";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -20,32 +11,65 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "../ui/alert-dialog";
+import useRemoveProductDialog from "./useRemoveProductDialog";
+import { AlertTriangle, LoaderIcon } from "lucide-react";
+import { Alert, AlertDescription } from "../ui/alert";
 
 type RemoveProductDialogProps = {
-  open?: boolean;
-  setOpen?: (open: boolean) => void;
+  productId: number;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 };
 
-export default function RemoveProductDialog(props: RemoveProductDialogProps) {
+function RemoveProductDialog({
+  productId,
+  open,
+  setOpen,
+}: RemoveProductDialogProps) {
+  const { isPending, isError, deleteProduct } = useRemoveProductDialog();
+
   return (
-    <AlertDialog open={true}>
-      <AlertDialogContent>
+    <AlertDialog open={open}>
+      <AlertDialogContent className="max-w-sm">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the product data from our servers.
+            This action cannot be undone. This will permanently delete the
+            product data from our servers.
           </AlertDialogDescription>
+          {isError && (
+            <Alert variant="destructive" className="mt-4">
+              <AlertTriangle />
+              <AlertDescription>
+                There was an error while trying to remove the product. Please
+                try again.
+              </AlertDescription>
+            </Alert>
+          )}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className="cursor-pointer">
+          <AlertDialogCancel
+            className="cursor-pointer"
+            onClick={() => setOpen(false)}
+          >
             Cancel
           </AlertDialogCancel>
-         
-          <Button className="bg-red-700 text-white hover:bg-red-600 cursor-pointer">
-            Continue
+
+          <Button
+            disabled={isPending}
+            className="bg-red-700 text-white hover:bg-red-600 cursor-pointer sm:w-32"
+            onClick={() => deleteProduct(productId)}
+          >
+            {isPending ? (
+              <LoaderIcon className="animate-spin" />
+            ) : (
+              "Delete product"
+            )}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
 }
+
+export default React.memo(RemoveProductDialog);
