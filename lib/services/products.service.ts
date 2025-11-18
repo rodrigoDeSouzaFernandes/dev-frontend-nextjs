@@ -22,7 +22,7 @@ export const productsService = {
     return data;
   },
 
-  remove: async (id: number) => {
+  delete: async (id: number) => {
     const { data } = await api.delete(`/products/${id}`);
     return data;
   },

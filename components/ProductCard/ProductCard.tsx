@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardAction,
@@ -14,17 +16,23 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+} from "../ui/dropdown-menu";
 
 import { Product } from "@/types/products";
+import { useModalStore } from "@/stores/useModalStore";
+import { use } from "react";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export default function ProductCard({
-  product: { title, description, image, price },
+  product: { title, description, image, price, id },
 }: ProductCardProps) {
+  const openRemoveProductDialog = useModalStore(
+    (state) => state.openRemoveProductDialog
+  );
+
   return (
     <Card className="relative grid grid-rows-[1fr_auto_auto] ">
       <CardHeader className="flex-1 ">
@@ -48,13 +56,26 @@ export default function ProductCard({
             align="end"
             className="bg-popover text-popover-foreground border border-border rounded-md shadow-md w-30 cursor-pointer"
           >
-            <DropdownMenuItem className="p-2 hover:bg-gray-100">Edit</DropdownMenuItem>
-            <DropdownMenuItem className="p-2 hover:bg-red-50 hover:text-red-600">Delete</DropdownMenuItem>
+            <DropdownMenuItem className="p-2 hover:bg-gray-100">
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="p-2 hover:bg-red-50 hover:text-red-600"
+              onClick={() => {
+                openRemoveProductDialog(id);
+              }}
+            >
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
       <CardContent className="mt-auto">
-        <img className="min-h-40 max-h-60 h-[100%] sm:h-60 m-auto object-contain" src={image} alt={`Image of ${title}`} />
+        <img
+          className="min-h-40 max-h-60 h-[100%] sm:h-60 m-auto object-contain"
+          src={image}
+          alt={`Image of ${title}`}
+        />
         <p className="w-full text-right  mt-6">
           Price:{" "}
           <span className="font-semibold text-xl text-right ">R$ {price}</span>
