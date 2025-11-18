@@ -15,16 +15,12 @@ const ModalComponents: Record<keyof ModalTypes, React.FC<any>> = {
 };
 
 export default function ModalRoot() {
-  const { modalType, modalProps, closeModal } = useModalStore();
-
-  if (!modalType) return null;
-
-  const Modal = ModalComponents[modalType];
+    const removeProductDialogProps = useModalStore(state => state.removeProductDialog);
 
   return (
     <>
       <React.Suspense fallback={<div>Loading...</div>}>
-        <Modal {...modalProps as ModalTypes[typeof modalType]} />
+        <RemoveProductDialog {...removeProductDialogProps} />
       </React.Suspense>
     </>
   );

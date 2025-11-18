@@ -27,9 +27,11 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({
-  product: { title, description, image, price },
+  product: { title, description, image, price, id },
 }: ProductCardProps) {
-  const openModal = useModalStore(state => state.openModal);
+  const openRemoveProductDialog = useModalStore(
+    (state) => state.openRemoveProductDialog
+  );
 
   return (
     <Card className="relative grid grid-rows-[1fr_auto_auto] ">
@@ -60,7 +62,7 @@ export default function ProductCard({
             <DropdownMenuItem
               className="p-2 hover:bg-red-50 hover:text-red-600"
               onClick={() => {
-                openModal("removeProduct", { productId: 5 });
+                openRemoveProductDialog(id);
               }}
             >
               Delete

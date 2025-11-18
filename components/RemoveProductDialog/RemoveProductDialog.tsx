@@ -17,13 +17,15 @@ import { Alert, AlertDescription } from "../ui/alert";
 import { RemoveProductDialogProps } from "@/types/products.dialogs";
 import { useModalStore } from "@/stores/useModalStore";
 
-function RemoveProductDialog({ productId }: RemoveProductDialogProps) {
-    
-    const closeModal = useModalStore((state) => state.closeModal);
-    const { isPending, isError, deleteProduct } = useRemoveProductDialog({closeModal});
+function RemoveProductDialog({ productId, open }: RemoveProductDialogProps) {
+  const closeModal = useModalStore((state) => state.closeRemoveProductDialog);
+
+  const { isPending, isError, deleteProduct } = useRemoveProductDialog({
+    closeModal,
+  });
 
   return (
-    <AlertDialog open={true}>
+    <AlertDialog open={open}>
       <AlertDialogContent className="max-w-sm">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
