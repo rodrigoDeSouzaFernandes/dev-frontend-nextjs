@@ -33,7 +33,7 @@ function RemoveProductDialog({ productId, open }: RemoveProductDialogProps) {
             This action cannot be undone. This will permanently delete the
             product data from our servers.
           </AlertDialogDescription>
-          {isError && (
+          {isError ? (
             <Alert variant="destructive" className="mt-4">
               <AlertTriangle />
               <AlertDescription>
@@ -41,7 +41,7 @@ function RemoveProductDialog({ productId, open }: RemoveProductDialogProps) {
                 try again.
               </AlertDescription>
             </Alert>
-          )}
+          ) : null}
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="cursor-pointer" onClick={closeModal}>
