@@ -3,32 +3,37 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ControllerRenderProps, useForm } from "react-hook-form";
 import { Product } from "@/types/products";
 import { useCallback, useEffect } from "react";
-import { formatPriceValue } from "@/utils/formatCurrency";
+import { formatPriceValue, parsePriceValue } from "@/utils/formatCurrency";
 import { producFormSchema } from "@/schemas/product/product.schema";
 import { useMutation } from "@tanstack/react-query";
 import { productsService } from "@/lib/services/products.service";
 import { toast } from "sonner";
+import { generateFakeImageUrl } from "@/utils/generateFakeImageUrl";
 
 interface UseEditProductFormProps {
   productData: Product | undefined;
+  productId: number;
+  closeModal: () => void;
 }
 export type ProductFormType = z.infer<typeof producFormSchema>;
 
 export const useEditProductForm = ({
   productData,
+  productId,
+  closeModal,
 }: UseEditProductFormProps) => {
-
   const {
-    isPending,
-    isError,
+    isPending: updateProductLoading,
+    isError: updateProductError,
     mutate: updateProduct,
   } = useMutation({
     mutationFn: productsService.update,
     onSuccess: () => {
       toast.success("Product updated successfully.");
+      closeModal();
     },
+    onError: (err) => console.log(err),
   });
-
 
   const form = useForm<ProductFormType>({
     resolver: zodResolver(producFormSchema),
@@ -40,10 +45,6 @@ export const useEditProductForm = ({
       image: "",
     },
   });
-
-  function handleFormSubmit(data: ProductFormType) {
-    console.log(data);
-  }
 
   async function handleImageChange(
     e: React.ChangeEvent<HTMLInputElement>,
@@ -66,6 +67,16 @@ export const useEditProductForm = ({
     reader.readAsDataURL(file);
   }
 
+  const clearForm = useCallback(() => {
+    form.reset({
+      title: "",
+      category: "",
+      price: "",
+      description: "",
+      image: "",
+    });
+  }, []);
+
   const resetForm = useCallback((): void => {
     if (productData && form) {
       form.reset({
@@ -78,9 +89,31 @@ export const useEditProductForm = ({
     }
   }, [productData, form]);
 
+  async function handleFormSubmit(data: ProductFormType) {
+    const product: Product = {
+      ...data,
+      id: productId,
+      price: parsePriceValue(data.price),
+      image: generateFakeImageUrl(data.image),
+    };
+
+    await updateProduct({
+      id: productId,
+      payload: product,
+    });
+  }
+
   useEffect(() => {
     resetForm();
   }, [resetForm]);
 
-  return { form, handleFormSubmit, handleImageChange, resetForm };
+  return {
+    handleFormSubmit,
+    handleImageChange,
+    resetForm,
+    clearForm,
+    form,
+    updateProductLoading,
+    updateProductError,
+  };
 };

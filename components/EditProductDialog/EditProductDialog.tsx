@@ -20,6 +20,7 @@ import { useEditProductForm } from "./hooks/useEditProductForm";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import EditProductDialogSkeleton from "./EditProductDialogSkeleton";
 import { useEditProductDialog } from "./hooks/useEditProductDialog";
+import { Spinner } from "../ui/spinner";
 
 type EditProductDialogProps = {
   open: boolean;
@@ -30,21 +31,33 @@ export default function EditProductDialog({
   productId,
   open,
 }: EditProductDialogProps) {
+  const closeModal = useModalStore((state) => state.closeEditProductDialog);
+
   const { productData, isLoading, isError } = useEditProductDialog({
     productId,
   });
-  const { form, handleFormSubmit, handleImageChange, resetForm } =
-    useEditProductForm({
-      productData,
-    });
 
-  const closeModal = useModalStore((state) => state.closeEditProductDialog);
+  const {
+    form,
+    handleFormSubmit,
+    handleImageChange,
+    resetForm,
+    clearForm,
+    updateProductLoading,
+    updateProductError,
+  } = useEditProductForm({
+    productData,
+    productId,
+    closeModal
+  });
+
 
   return (
     <Dialog
       open={open}
       onOpenChange={() => {
         closeModal();
+        clearForm();
       }}
     >
       <DialogContent className="max-h-[90vh] flex flex-col">
@@ -225,6 +238,15 @@ export default function EditProductDialog({
                     />
                   </FieldGroup>
                 </form>
+                {updateProductError ? (
+                  <Alert variant="destructive">
+                    <AlertCircleIcon />
+                    <AlertTitle>Something Went Wrong</AlertTitle>
+                    <AlertDescription>
+                      We were unable to save your changes. Please try again.
+                    </AlertDescription>
+                  </Alert>
+                ) : null}
                 <DialogFooter>
                   <Button
                     className="mr-auto"
@@ -236,8 +258,11 @@ export default function EditProductDialog({
                   <Button variant="outline" onClick={closeModal}>
                     Cancel
                   </Button>
-                  <Button onClick={form.handleSubmit(handleFormSubmit)}>
-                    Save Changes
+                  <Button
+                    disabled={updateProductLoading}
+                    onClick={form.handleSubmit(handleFormSubmit)}
+                  >
+                    {updateProductLoading ? <Spinner /> : "Save Changes"}
                   </Button>
                 </DialogFooter>
               </>

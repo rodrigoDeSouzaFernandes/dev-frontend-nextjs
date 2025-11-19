@@ -9,3 +9,7 @@ export function formatPriceValue(value: string) {
   const number = Number(digits) / 100;
   return formatCurrencyUSD(number);
 }
+
+export function parsePriceValue(value: string): number {
+  return Number(value.replace(/[^0-9.]/g, ""));
+}
