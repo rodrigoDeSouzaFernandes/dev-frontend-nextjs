@@ -9,29 +9,35 @@ import {
 } from "../ui/dialog";
 
 import { Controller } from "react-hook-form";
-import { useEditProductDialog } from "./useEditProductDialog";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { Trash } from "lucide-react";
 import { formatPriceValue } from "@/utils/formatCurrency";
+import { useModalStore } from "@/stores/useModalStore";
+import { useEditProductForm } from "./hooks/useEditProductForm";
+import { useEditProductDialog } from "./hooks/useEditProductDialog";
 
 type EditProductDialogProps = {
   open: boolean;
   productId: number;
 };
 
-export default function EditProductDialog(props: EditProductDialogProps) {
-  const { form, handleFormSubmit, handleImageChange } = useEditProductDialog();
+export default function EditProductDialog({
+  productId,
+  open,
+}: EditProductDialogProps) {
+  const {} = useEditProductDialog({ productId });
+  const { form, handleFormSubmit, handleImageChange } = useEditProductForm();
+
+  const closeModal = useModalStore((state) => state.closeEditProductDialog);
 
   return (
     <Dialog
-      open={props.open}
-      onOpenChange={(isOpen) => {
-        if (isOpen) {
-          //close
-        }
+      open={open}
+      onOpenChange={() => {
+        closeModal();
       }}
     >
       <DialogContent className="max-h-[90vh] flex flex-col">
@@ -174,7 +180,9 @@ export default function EditProductDialog(props: EditProductDialogProps) {
           </FieldGroup>
         </form>
         <DialogFooter>
-          <Button variant="outline">Cancel</Button>
+          <Button variant="outline" onClick={closeModal}>
+            Cancel
+          </Button>
           <Button onClick={form.handleSubmit(handleFormSubmit)}>
             Save changes
           </Button>

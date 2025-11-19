@@ -21,7 +21,7 @@ const formSchema = z.object({
     .refine((val) => val.startsWith("data:"), "Invalid image"),
 });
 
-export const useEditProductDialog = () => {
+export const useEditProductForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
