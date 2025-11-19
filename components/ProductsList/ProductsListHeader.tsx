@@ -14,7 +14,7 @@ export default function ProductsListHeader() {
       <h1 className="font-bold text-5xl">Produtos</h1>
       <Button className="ml-auto self-center" onClick={openCreateProductModal}>
         <Plus />
-        Cadastrar Novo Produto
+        Create New Product
       </Button>
     </section>
   );

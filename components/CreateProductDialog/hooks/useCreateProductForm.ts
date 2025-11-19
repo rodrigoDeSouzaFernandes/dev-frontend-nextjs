@@ -18,18 +18,7 @@ export type ProductFormType = z.infer<typeof producFormSchema>;
 export const useCreateProductForm = ({
   closeModal,
 }: UseCreateProductFormProps) => {
-  const {
-    isPending: updateProductLoading,
-    isError: updateProductError,
-    mutate: createProduct,
-  } = useMutation({
-    mutationFn: productsService.create,
-    onSuccess: () => {
-      toast.success("Product created successfully.");
-      closeModal();
-    },
-    onError: (err) => console.log(err),
-  });
+
 
   const form = useForm<ProductFormType>({
     resolver: zodResolver(producFormSchema),
@@ -52,6 +41,19 @@ export const useCreateProductForm = ({
     });
   }, []);
 
+    const {
+    isPending: createProductLoading,
+    isError: createProductError,
+    mutate: createProduct,
+  } = useMutation({
+    mutationFn: productsService.create,
+    onSuccess: () => {
+      toast.success("Product created successfully.");
+      closeModal();
+      clearForm();
+    },
+  });
+
   async function handleFormSubmit(data: ProductFormType) {
     const product: Omit<Product, "id"> = {
       ...data,
@@ -66,7 +68,7 @@ export const useCreateProductForm = ({
     handleFormSubmit,
     clearForm,
     form,
-    updateProductLoading,
-    updateProductError,
+    createProductLoading,
+    createProductError,
   };
 };

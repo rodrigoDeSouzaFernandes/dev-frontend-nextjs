@@ -1,6 +1,5 @@
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ControllerRenderProps, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Product, ProductFormType } from "@/types/products";
 import { useCallback, useEffect } from "react";
 import { formatPriceValue, parsePriceValue } from "@/utils/formatCurrency";
@@ -21,19 +20,6 @@ export const useEditProductForm = ({
   productId,
   closeModal,
 }: UseEditProductFormProps) => {
-  const {
-    isPending: updateProductLoading,
-    isError: updateProductError,
-    mutate: updateProduct,
-  } = useMutation({
-    mutationFn: productsService.update,
-    onSuccess: () => {
-      toast.success("Product updated successfully.");
-      closeModal();
-    },
-    onError: (err) => console.log(err),
-  });
-
   const form = useForm<ProductFormType>({
     resolver: zodResolver(producFormSchema),
     defaultValues: {
@@ -54,6 +40,19 @@ export const useEditProductForm = ({
       image: "",
     });
   }, []);
+
+  const {
+    isPending: updateProductLoading,
+    isError: updateProductError,
+    mutate: updateProduct,
+  } = useMutation({
+    mutationFn: productsService.update,
+    onSuccess: () => {
+      toast.success("Product updated successfully.");
+      closeModal();
+      clearForm();
+    },
+  });
 
   const resetForm = useCallback((): void => {
     if (productData && form) {
