@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useModalStore } from "@/stores/useModalStore";
-import { Spinner } from "../ui/spinner";
 import LoadingFallback from "../LoadingFallback/LoadingFallback";
 
 const RemoveProductDialog = React.lazy(
@@ -29,7 +28,6 @@ export default function ModalRoot() {
       <React.Suspense fallback={<LoadingFallback />}>
         <EditProductDialog {...editProductDialogProps} />
       </React.Suspense>
-      <LoadingFallback />
     </>
   );
 }

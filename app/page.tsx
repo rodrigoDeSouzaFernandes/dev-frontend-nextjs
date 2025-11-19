@@ -1,9 +1,5 @@
-import EditProductDialog from "@/components/EditProductDialog";
-import LoadingFallback from "@/components/LoadingFallback/LoadingFallback";
 import ProductsList from "@/components/ProductsList/ProductsList";
-import RemoveProductDialog from "@/components/RemoveProductDialog";
 import { Button } from "@/components/ui/button";
-import { Edit } from "lucide-react";
 
 export default function Home() {
   return (
