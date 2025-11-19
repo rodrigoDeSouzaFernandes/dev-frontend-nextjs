@@ -84,5 +84,5 @@ export const useEditProductForm = ({
     resetForm();
   }, [resetForm]);
 
-  return { form, handleFormSubmit, handleImageChange };
+  return { form, handleFormSubmit, handleImageChange, resetForm };
 };

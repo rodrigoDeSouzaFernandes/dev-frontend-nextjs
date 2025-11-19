@@ -17,7 +17,6 @@ import { AlertCircleIcon, Trash } from "lucide-react";
 import { formatPriceValue } from "@/utils/formatCurrency";
 import { useModalStore } from "@/stores/useModalStore";
 import { useEditProductForm } from "./hooks/useEditProductForm";
-import { Skeleton } from "../ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import EditProductDialogSkeleton from "./EditProductDialogSkeleton";
 import { useEditProductDialog } from "./hooks/useEditProductDialog";
@@ -34,9 +33,10 @@ export default function EditProductDialog({
   const { productData, isLoading, isError } = useEditProductDialog({
     productId,
   });
-  const { form, handleFormSubmit, handleImageChange } = useEditProductForm({
-    productData,
-  });
+  const { form, handleFormSubmit, handleImageChange, resetForm } =
+    useEditProductForm({
+      productData,
+    });
 
   const closeModal = useModalStore((state) => state.closeEditProductDialog);
 
@@ -203,7 +203,7 @@ export default function EditProductDialog({
                                   onClick={() => {
                                     form.setValue("image", "");
                                   }}
-                                  className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full"
+                                  className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full outline-black p-2"
                                   aria-label="Remove selected image"
                                 >
                                   <Trash className="w-4 h-4" />
@@ -229,15 +229,15 @@ export default function EditProductDialog({
                   <Button
                     className="mr-auto"
                     variant="outline"
-                    onClick={closeModal}
+                    onClick={resetForm}
                   >
-                    Reset form
+                    Reset Form
                   </Button>
                   <Button variant="outline" onClick={closeModal}>
                     Cancel
                   </Button>
                   <Button onClick={form.handleSubmit(handleFormSubmit)}>
-                    Save changes
+                    Save Changes
                   </Button>
                 </DialogFooter>
               </>
