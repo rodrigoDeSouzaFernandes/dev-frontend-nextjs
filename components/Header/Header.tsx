@@ -29,7 +29,7 @@ export default function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar>
-                <AvatarImage src="/avatar.png" alt="User" />
+                <AvatarImage src="" alt="User" />
                 <AvatarFallback>RC</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>

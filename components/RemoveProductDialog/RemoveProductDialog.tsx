@@ -11,11 +11,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "../ui/alert-dialog";
-import useRemoveProductDialog from "./useRemoveProductDialog";
-import { AlertTriangle, LoaderIcon } from "lucide-react";
+import useRemoveProductDialog from "./hooks/useRemoveProductDialog";
+import { AlertTriangle } from "lucide-react";
 import { Alert, AlertDescription } from "../ui/alert";
 import { RemoveProductDialogProps } from "@/types/products.dialogs";
 import { useModalStore } from "@/stores/useModalStore";
+import { Spinner } from "../ui/spinner";
 
 function RemoveProductDialog({ productId, open }: RemoveProductDialogProps) {
   const closeModal = useModalStore((state) => state.closeRemoveProductDialog);
@@ -53,11 +54,7 @@ function RemoveProductDialog({ productId, open }: RemoveProductDialogProps) {
             className="bg-red-700 text-white hover:bg-red-600 cursor-pointer sm:w-32"
             onClick={() => deleteProduct(productId)}
           >
-            {isPending ? (
-              <LoaderIcon className="animate-spin" />
-            ) : (
-              "Delete product"
-            )}
+            {isPending ? <Spinner /> : "Delete product"}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

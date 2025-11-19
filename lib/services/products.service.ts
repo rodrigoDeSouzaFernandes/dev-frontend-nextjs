@@ -1,6 +1,11 @@
 import { api } from "../api";
 import { Product } from "@/types/products";
 
+interface ProductUpdateRequest {
+  id: number;
+  payload: Product;
+}
+
 export const productsService = {
   getAll: async (): Promise<Product[]> => {
     const response = await api.get("/products");
@@ -12,18 +17,17 @@ export const productsService = {
     return data;
   },
 
-  create: async (payload: Product) => {
+  create: async (payload: Product): Promise<Product> => {
     const { data } = await api.post("/products", payload);
     return data;
   },
 
-  update: async (id: number, payload: Product) => {
+  update: async ({ id, payload }: ProductUpdateRequest): Promise<Product> => {
     const { data } = await api.put(`/products/${id}`, payload);
     return data;
   },
 
-  delete: async (id: number) => {
-    const { data } = await api.delete(`/products/${id}`);
-    return data;
+  delete: async (id: number): Promise<void> => {
+    await api.delete(`/products/${id}`);
   },
 };

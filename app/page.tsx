@@ -1,5 +1,4 @@
 import ProductsList from "@/components/ProductsList/ProductsList";
-import RemoveProductDialog from "@/components/RemoveProductDialog";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {

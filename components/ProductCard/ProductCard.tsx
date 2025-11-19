@@ -20,7 +20,6 @@ import {
 
 import { Product } from "@/types/products";
 import { useModalStore } from "@/stores/useModalStore";
-import { use } from "react";
 
 type ProductCardProps = {
   product: Product;
@@ -31,6 +30,9 @@ export default function ProductCard({
 }: ProductCardProps) {
   const openRemoveProductDialog = useModalStore(
     (state) => state.openRemoveProductDialog
+  );
+  const openEditProductDialog = useModalStore(
+    (state) => state.openEditProductDialog
   );
 
   return (
@@ -56,7 +58,12 @@ export default function ProductCard({
             align="end"
             className="bg-popover text-popover-foreground border border-border rounded-md shadow-md w-30 cursor-pointer"
           >
-            <DropdownMenuItem className="p-2 hover:bg-gray-100">
+            <DropdownMenuItem
+              className="p-2 hover:bg-gray-100"
+              onClick={() => {
+                openEditProductDialog(id);
+              }}
+            >
               Edit
             </DropdownMenuItem>
             <DropdownMenuItem
