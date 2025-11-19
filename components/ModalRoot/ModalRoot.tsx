@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useModalStore } from "@/stores/useModalStore";
-import LoadingFallback from "../LoadingFallback/LoadingFallback";
+import LoadingFallback from "../LoadingFallback";
 
 const RemoveProductDialog = React.lazy(
   () => import("../RemoveProductDialog/RemoveProductDialog")

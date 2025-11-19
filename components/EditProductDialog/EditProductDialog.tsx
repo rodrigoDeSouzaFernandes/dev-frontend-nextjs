@@ -48,9 +48,8 @@ export default function EditProductDialog({
   } = useEditProductForm({
     productData,
     productId,
-    closeModal
+    closeModal,
   });
-
 
   return (
     <Dialog
