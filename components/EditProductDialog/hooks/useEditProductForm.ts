@@ -1,6 +1,14 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ControllerRenderProps, useForm } from "react-hook-form";
+import { Product } from "@/types/products";
+import { useCallback, useEffect } from "react";
+import { formatPriceValue } from "@/utils/formatCurrency";
+
+interface UseEditProductFormProps {
+  productData: Product | undefined;
+}
+export type ProductFormType = z.infer<typeof formSchema>;
 
 const formSchema = z.object({
   title: z.string().min(3, "The title must have at least 3 characters"),
@@ -21,8 +29,10 @@ const formSchema = z.object({
     .refine((val) => val.startsWith("data:"), "Invalid image"),
 });
 
-export const useEditProductForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+export const useEditProductForm = ({
+  productData,
+}: UseEditProductFormProps) => {
+  const form = useForm<ProductFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
@@ -57,6 +67,22 @@ export const useEditProductForm = () => {
     };
     reader.readAsDataURL(file);
   }
+
+  const resetForm = useCallback((): void => {
+    if (productData && form) {
+      form.reset({
+        title: productData.title,
+        category: productData.category,
+        price: formatPriceValue(productData.price.toString()),
+        description: productData.description,
+        image: productData.image,
+      });
+    }
+  }, [productData, form]);
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return { form, handleFormSubmit, handleImageChange };
 };
