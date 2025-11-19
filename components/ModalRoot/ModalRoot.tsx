@@ -1,27 +1,35 @@
 "use client";
 
+import React from "react";
 import { useModalStore } from "@/stores/useModalStore";
-import { ModalTypes } from "@/types/modaltypes";
-import { RemoveProductDialogProps } from "@/types/products.dialogs";
-import React, { useState } from "react";
+import { Spinner } from "../ui/spinner";
+import LoadingFallback from "../LoadingFallback/LoadingFallback";
 
 const RemoveProductDialog = React.lazy(
   () => import("../RemoveProductDialog/RemoveProductDialog")
 );
 
-const ModalComponents: Record<keyof ModalTypes, React.FC<any>> = {
-  "removeProduct": RemoveProductDialog,
-//   "editProduct": <p>oi</p> as unknown as React.FC<any>,
-};
+const EditProductDialog = React.lazy(
+  () => import("../EditProductDialog/EditProductDialog")
+);
 
 export default function ModalRoot() {
-    const removeProductDialogProps = useModalStore(state => state.removeProductDialog);
+  const removeProductDialogProps = useModalStore(
+    (state) => state.removeProductDialog
+  );
+  const editProductDialogProps = useModalStore(
+    (state) => state.editProductDialog
+  );
 
   return (
     <>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<LoadingFallback />}>
         <RemoveProductDialog {...removeProductDialogProps} />
       </React.Suspense>
+      <React.Suspense fallback={<LoadingFallback />}>
+        <EditProductDialog {...editProductDialogProps} />
+      </React.Suspense>
+      <LoadingFallback />
     </>
   );
-}   
+}

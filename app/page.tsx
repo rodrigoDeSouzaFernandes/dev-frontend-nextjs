@@ -1,4 +1,5 @@
 import EditProductDialog from "@/components/EditProductDialog";
+import LoadingFallback from "@/components/LoadingFallback/LoadingFallback";
 import ProductsList from "@/components/ProductsList/ProductsList";
 import RemoveProductDialog from "@/components/RemoveProductDialog";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,6 @@ export default function Home() {
         </Button>
       </section>
       <ProductsList />
-      <EditProductDialog open={true} productId={0} />
     </main>
   );
 }

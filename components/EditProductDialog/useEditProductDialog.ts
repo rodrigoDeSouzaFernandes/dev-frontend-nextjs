@@ -1,7 +1,6 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ControllerRenderProps, useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z.string().min(3, "The title must have at least 3 characters"),
