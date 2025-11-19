@@ -4,36 +4,34 @@ import { ControllerRenderProps, useForm } from "react-hook-form";
 import { Product } from "@/types/products";
 import { useCallback, useEffect } from "react";
 import { formatPriceValue } from "@/utils/formatCurrency";
+import { producFormSchema } from "@/schemas/product/product.schema";
+import { useMutation } from "@tanstack/react-query";
+import { productsService } from "@/lib/services/products.service";
+import { toast } from "sonner";
 
 interface UseEditProductFormProps {
   productData: Product | undefined;
 }
-export type ProductFormType = z.infer<typeof formSchema>;
-
-const formSchema = z.object({
-  title: z.string().min(3, "The title must have at least 3 characters"),
-  price: z
-    .string()
-    .transform((val) => val.replace(/[^0-9\.,]+/g, ""))
-    .refine(
-      (val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0,
-      "The price must be a positive number"
-    ),
-  description: z
-    .string()
-    .min(10, "The description must have at least 10 characters"),
-  category: z.string().min(3, "The category must have at least 3 characters"),
-  image: z
-    .string()
-    .nonempty("The image is required")
-    .refine((val) => val.startsWith("data:"), "Invalid image"),
-});
+export type ProductFormType = z.infer<typeof producFormSchema>;
 
 export const useEditProductForm = ({
   productData,
 }: UseEditProductFormProps) => {
+
+  const {
+    isPending,
+    isError,
+    mutate: updateProduct,
+  } = useMutation({
+    mutationFn: productsService.update,
+    onSuccess: () => {
+      toast.success("Product updated successfully.");
+    },
+  });
+
+
   const form = useForm<ProductFormType>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(producFormSchema),
     defaultValues: {
       title: "",
       price: "",
@@ -43,13 +41,13 @@ export const useEditProductForm = ({
     },
   });
 
-  function handleFormSubmit(data: z.infer<typeof formSchema>) {
+  function handleFormSubmit(data: ProductFormType) {
     console.log(data);
   }
 
   async function handleImageChange(
     e: React.ChangeEvent<HTMLInputElement>,
-    field: ControllerRenderProps<z.infer<typeof formSchema>, "image">
+    field: ControllerRenderProps<z.infer<typeof producFormSchema>, "image">
   ) {
     const file = e.target.files?.[0];
     if (!file) return;

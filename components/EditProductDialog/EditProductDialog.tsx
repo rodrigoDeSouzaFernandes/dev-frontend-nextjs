@@ -76,7 +76,7 @@ export default function EditProductDialog({
             ) : (
               <>
                 <form className="overflow-y-auto pb-4">
-                  <FieldGroup>
+                  <FieldGroup className="gap-4">
                     <Controller
                       name="title"
                       control={form.control}
