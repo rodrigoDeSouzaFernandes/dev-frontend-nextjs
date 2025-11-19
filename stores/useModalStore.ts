@@ -15,4 +15,10 @@ export const useModalStore = create<ModalStore>((set) => ({
     set(() => ({ editProductDialog: { open: true, productId } })),
   closeEditProductDialog: () =>
     set(() => ({ editProductDialog: { open: false, productId: 0 } })),
+
+  createProductDialog: { open: false },
+  openCreateProductDialog: () =>
+    set(() => ({ createProductDialog: { open: true } })),
+  closeCreateProductDialog: () =>
+    set(() => ({ createProductDialog: { open: false } })),
 }));

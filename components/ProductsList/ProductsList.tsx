@@ -1,6 +1,7 @@
 import useProductsList from "./hooks/useProductsList";
 import ProductCard from "../ProductCard/ProductCard";
 import { AlertTriangleIcon } from "lucide-react";
+import ProductsListHeader from "./ProductsListHeader";
 
 type ProductsListProps = {};
 
@@ -20,13 +21,16 @@ export default async function ProductsList(props: ProductsListProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 gap-6">
-      {products.map((product, index) => (
-        <ProductCard
-          key={`product-${product.title}-${index}`}
-          product={product}
-        />
-      ))}
-    </div>
+    <>
+      <ProductsListHeader />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 gap-6">
+        {products.map((product, index) => (
+          <ProductCard
+            key={`product-${product.title}-${index}`}
+            product={product}
+          />
+        ))}
+      </div>
+    </>
   );
 }

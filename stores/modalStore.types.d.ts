@@ -5,7 +5,11 @@ export type ModalStore = {
   openRemoveProductDialog: (productId: number) => void;
   closeRemoveProductDialog: () => void;
 
-  editProductDialog: { open: boolean; productId: number; };
+  editProductDialog: { open: boolean; productId: number };
   openEditProductDialog: (productId: number) => void;
   closeEditProductDialog: () => void;
+
+  createProductDialog: { open: boolean };
+  openCreateProductDialog: () => void;
+  closeCreateProductDialog: () => void;
 };

@@ -9,30 +9,33 @@ import {
 } from "../ui/dialog";
 
 import { Controller } from "react-hook-form";
-import { useCreateProductDialog } from "./useCreateProductDialog";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { Trash } from "lucide-react";
 import { formatPriceValue } from "@/utils/formatCurrency";
+import { useCreateProductForm } from "./hooks/useCreateProductForm";
+import { useModalStore } from "@/stores/useModalStore";
 
 type CreateProductDialogProps = {
   open: boolean;
-  productId: number;
 };
 
 export default function CreateProductDialog(props: CreateProductDialogProps) {
-  const { form, handleFormSubmit, handleImageChange } =
-    useCreateProductDialog();
+  const closeModal = useModalStore((state) => state.closeCreateProductDialog);
+
+  const { form, handleFormSubmit, handleImageChange, clearForm } =
+    useCreateProductForm({
+      closeModal,
+    });
 
   return (
     <Dialog
       open={props.open}
-      onOpenChange={(isOpen) => {
-        if (isOpen) {
-          //close
-        }
+      onOpenChange={() => {
+        closeModal();
+        clearForm();
       }}
     >
       <DialogContent className="max-h-[90vh] flex flex-col">

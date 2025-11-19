@@ -4,13 +4,11 @@ import React from "react";
 import { useModalStore } from "@/stores/useModalStore";
 import LoadingFallback from "../LoadingFallback";
 
-const RemoveProductDialog = React.lazy(
-  () => import("../RemoveProductDialog/RemoveProductDialog")
-);
+const RemoveProductDialog = React.lazy(() => import("../RemoveProductDialog/"));
 
-const EditProductDialog = React.lazy(
-  () => import("../EditProductDialog/EditProductDialog")
-);
+const EditProductDialog = React.lazy(() => import("../EditProductDialog/"));
+
+const CreateProductDialog = React.lazy(() => import("../CreateProductDialog"));
 
 export default function ModalRoot() {
   const removeProductDialogProps = useModalStore(
@@ -18,6 +16,9 @@ export default function ModalRoot() {
   );
   const editProductDialogProps = useModalStore(
     (state) => state.editProductDialog
+  );
+  const createProductDialogProps = useModalStore(
+    (state) => state.createProductDialog
   );
 
   return (
@@ -27,6 +28,9 @@ export default function ModalRoot() {
       </React.Suspense>
       <React.Suspense fallback={<LoadingFallback />}>
         <EditProductDialog {...editProductDialogProps} />
+      </React.Suspense>
+      <React.Suspense fallback={<LoadingFallback />}>
+        <CreateProductDialog {...createProductDialogProps} />
       </React.Suspense>
     </>
   );
