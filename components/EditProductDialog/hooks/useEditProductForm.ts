@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ControllerRenderProps, useForm } from "react-hook-form";
-import { Product } from "@/types/products";
+import { Product, ProductFormType } from "@/types/products";
 import { useCallback, useEffect } from "react";
 import { formatPriceValue, parsePriceValue } from "@/utils/formatCurrency";
 import { producFormSchema } from "@/schemas/product/product.schema";
@@ -15,7 +15,6 @@ interface UseEditProductFormProps {
   productId: number;
   closeModal: () => void;
 }
-export type ProductFormType = z.infer<typeof producFormSchema>;
 
 export const useEditProductForm = ({
   productData,
@@ -45,27 +44,6 @@ export const useEditProductForm = ({
       image: "",
     },
   });
-
-  async function handleImageChange(
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: ControllerRenderProps<z.infer<typeof producFormSchema>, "image">
-  ) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      field.onChange("");
-      e.target.value = "";
-      form.setError("image", { message: "Only image files are allowed" });
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      field.onChange(reader.result);
-    };
-    reader.readAsDataURL(file);
-  }
 
   const clearForm = useCallback(() => {
     form.reset({
@@ -109,7 +87,6 @@ export const useEditProductForm = ({
 
   return {
     handleFormSubmit,
-    handleImageChange,
     resetForm,
     clearForm,
     form,

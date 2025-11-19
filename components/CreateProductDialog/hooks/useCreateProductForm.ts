@@ -42,27 +42,6 @@ export const useCreateProductForm = ({
     },
   });
 
-  async function handleImageChange(
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: ControllerRenderProps<z.infer<typeof producFormSchema>, "image">
-  ) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      field.onChange("");
-      e.target.value = "";
-      form.setError("image", { message: "Only image files are allowed" });
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      field.onChange(reader.result);
-    };
-    reader.readAsDataURL(file);
-  }
-
   const clearForm = useCallback(() => {
     form.reset({
       title: "",
@@ -83,10 +62,8 @@ export const useCreateProductForm = ({
     await createProduct(product);
   }
 
-
   return {
     handleFormSubmit,
-    handleImageChange,
     clearForm,
     form,
     updateProductLoading,
