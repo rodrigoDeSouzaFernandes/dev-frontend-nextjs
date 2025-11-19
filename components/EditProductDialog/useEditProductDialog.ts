@@ -7,8 +7,9 @@ const formSchema = z.object({
   title: z.string().min(3, "The title must have at least 3 characters"),
   price: z
     .string()
+    .transform((val) => val.replace(/[^0-9\.,]+/g, ""))
     .refine(
-      (val) => !isNaN(parseFloat(val)) && parseFloat(val) >= 0,
+      (val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0,
       "The price must be a positive number"
     ),
   description: z
