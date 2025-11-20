@@ -2,6 +2,7 @@ import useProductsList from "./hooks/useProductsList";
 import ProductCard from "../ProductCard/ProductCard";
 import { AlertTriangleIcon } from "lucide-react";
 import ProductsListHeader from "./ProductsListHeader";
+import CustomAlert from "../CustomAlert";
 
 type ProductsListProps = {};
 
@@ -12,10 +13,11 @@ export default async function ProductsList(props: ProductsListProps) {
     return (
       <div className="flex items-center gap-2">
         <AlertTriangleIcon className="h-5" />
-        <p className="pt-4 pb-4">
-          Houve uma instabilidade no servidor e não foi possível carregar os
-          produtos. tente novamente mais tarde.
-        </p>
+        <CustomAlert
+          variant="destructive"
+          title="Somehing Went Wrong"
+          description="We were unable to load the products at this time. This may be due to a temporary network issue on your side or a problem with our servers. Please check your connection and try again in a few minutes."
+        />
       </div>
     );
   }

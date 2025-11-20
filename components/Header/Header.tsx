@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { redirect } from "next/navigation";
 
 import { Menu } from "lucide-react";
 
@@ -23,7 +24,13 @@ export default function Header() {
           >
             <Menu />
           </Button>
-          <h1 className="text-xl font-bold">Next Store</h1>
+          <Button
+            variant="ghost"
+            className="p-0 hover:bg-transparent"
+            onClick={() => redirect("/")}
+          >
+            <h1 className="text-3xl font-bold">Next Store</h1>
+          </Button>
         </div>
         <div className="flex items-center gap-4">
           <DropdownMenu>
