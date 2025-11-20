@@ -17,7 +17,7 @@ export const productsService = {
     return data;
   },
 
-  create: async (payload: Product): Promise<Product> => {
+  create: async (payload: Omit<Product, "id">): Promise<Product> => {
     const { data } = await api.post("/products", payload);
     return data;
   },

@@ -20,6 +20,7 @@ import {
 
 import { Product } from "@/types/products";
 import { useModalStore } from "@/stores/useModalStore";
+import { formatPriceValue } from "@/utils/formatCurrency";
 
 type ProductCardProps = {
   product: Product;
@@ -85,7 +86,9 @@ export default function ProductCard({
         />
         <p className="w-full text-right  mt-6">
           Price:{" "}
-          <span className="font-semibold text-xl text-right ">R$ {price}</span>
+          <span className="font-semibold text-xl text-right ">
+            {formatPriceValue(price.toString())}
+          </span>
         </p>
       </CardContent>
       <CardFooter className="flex-col gap-2">
