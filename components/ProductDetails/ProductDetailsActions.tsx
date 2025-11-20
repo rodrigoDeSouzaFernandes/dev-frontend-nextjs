@@ -4,12 +4,11 @@ import { Button } from "../ui/button";
 import { Pencil, Trash } from "lucide-react";
 
 import { useModalStore } from "@/stores/useModalStore";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
-
-export default function ProductDetailsActions(
-) {
+export default function ProductDetailsActions() {
   const { id } = useParams();
+  const router = useRouter();
   const openEditProductDialog = useModalStore(
     (store) => store.openEditProductDialog
   );
@@ -26,7 +25,9 @@ export default function ProductDetailsActions(
 
       <Button
         variant="destructive"
-        onClick={() => openRemoveProductDialog(Number(id))}
+        onClick={() =>
+          openRemoveProductDialog(Number(id), () => router.replace("/"))
+        }
       >
         <Trash className="w-4 h-4" />
         Delete

@@ -82,7 +82,7 @@ export default function EditProductDialog({
                 ) : null}
                 <DialogFooter>
                   <Button
-                    className="mr-auto"
+                    className="sm:mr-auto"
                     variant="outline"
                     onClick={resetForm}
                   >
