@@ -18,11 +18,16 @@ import { RemoveProductDialogProps } from "@/types/products.dialogs";
 import { useModalStore } from "@/stores/useModalStore";
 import { Spinner } from "../ui/spinner";
 
-function RemoveProductDialog({ productId, open }: RemoveProductDialogProps) {
+function RemoveProductDialog({
+  productId,
+  open,
+  onSucces = () => {},
+}: RemoveProductDialogProps) {
   const closeModal = useModalStore((state) => state.closeRemoveProductDialog);
 
   const { isPending, isError, deleteProduct } = useRemoveProductDialog({
     closeModal,
+    onSucces
   });
 
   return (

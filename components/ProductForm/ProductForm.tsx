@@ -10,6 +10,8 @@ import { ProductFormType } from "@/types/products";
 import { formatPriceValue } from "@/utils/formatCurrency";
 import { Textarea } from "../ui/textarea";
 import { Trash } from "lucide-react";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 type ProductFormProps = {
   form: UseFormReturn<ProductFormType>;
@@ -138,22 +140,26 @@ export default function ProductForm({ form }: ProductFormProps) {
 
                 {imageUri ? (
                   <div className="relative w-40 h-40 rounded-lg overflow-hidden border bg-muted">
-                    <img
-                      src={imageUri}
-                      alt="Product image"
-                      className="object-contain w-full h-full"
-                    />
+                    <div className="relative min-h-40 h-[100%]">
+                      <Image
+                        src={imageUri}
+                        fill
+                        alt="Product image"
+                        className="object-contain"
+                      />
+                    </div>
 
-                    <button
+                    <Button
+                      variant="ghost"
                       type="button"
                       onClick={() => {
                         form.setValue("image", "");
                       }}
-                      className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full outline-black p-2"
+                      className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 hover:text-white text-white"
                       aria-label="Remove selected image"
                     >
                       <Trash className="w-4 h-4" />
-                    </button>
+                    </Button>
                   </div>
                 ) : (
                   <Input

@@ -21,6 +21,8 @@ import {
 import { Product } from "@/types/products";
 import { useModalStore } from "@/stores/useModalStore";
 import { formatPriceValue } from "@/utils/formatCurrency";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type ProductCardProps = {
   product: Product;
@@ -29,6 +31,7 @@ type ProductCardProps = {
 export default function ProductCard({
   product: { title, description, image, price, id },
 }: ProductCardProps) {
+  const router = useRouter();
   const openRemoveProductDialog = useModalStore(
     (state) => state.openRemoveProductDialog
   );
@@ -79,11 +82,14 @@ export default function ProductCard({
         </DropdownMenu>
       </div>
       <CardContent className="mt-auto">
-        <img
-          className="min-h-40 max-h-60 h-[100%] sm:h-60 m-auto object-contain"
-          src={image}
-          alt={`Image of ${title}`}
-        />
+        <div className="relative min-h-40 max-h-60 h-[100%] sm:h-60 m-auto">
+          <Image
+            src={image}
+            alt={`Image of ${title}`}
+            className="object-contain"
+            fill
+          />
+        </div>
         <p className="w-full text-right  mt-6">
           Price:{" "}
           <span className="font-semibold text-xl text-right ">
@@ -92,7 +98,11 @@ export default function ProductCard({
         </p>
       </CardContent>
       <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full"
+          onClick={() => router.replace(`products/${id}`)}
+        >
           See more
         </Button>
       </CardFooter>

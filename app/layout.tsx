@@ -34,7 +34,6 @@ export default function RootLayout({
         <QueryProvider>
           <ModalRoot />
           <Toaster />
-          <Header />
           {children}
         </QueryProvider>
       </body>

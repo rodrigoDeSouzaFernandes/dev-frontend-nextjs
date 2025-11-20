@@ -14,10 +14,7 @@ import { useModalStore } from "@/stores/useModalStore";
 import ProductForm from "../ProductForm/ProductForm";
 import { Spinner } from "../ui/spinner";
 import CustomAlert from "../CustomAlert";
-
-type CreateProductDialogProps = {
-  open: boolean;
-};
+import { CreateProductDialogProps } from "@/types/products.dialogs";
 
 export default function CreateProductDialog(props: CreateProductDialogProps) {
   const closeModal = useModalStore((state) => state.closeCreateProductDialog);
