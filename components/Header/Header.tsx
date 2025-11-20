@@ -14,7 +14,7 @@ import { Menu } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="  px-4 bg-white shadow-md">
+    <header className="bg-white shadow-md">
       <div className="max-w-[1400px] m-auto flex items-center justify-between h-16 p-4">
         <div className="flex items-center gap-4">
           <Button
