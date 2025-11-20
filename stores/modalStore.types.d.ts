@@ -1,11 +1,14 @@
-import type { RemoveProductDialogProps } from "@/types/products.dialogs";
+import type {
+  EditProductDialogProps,
+  RemoveProductDialogProps,
+} from "@/types/products.dialogs";
 
 export type ModalStore = {
   removeProductDialog: RemoveProductDialogProps;
-  openRemoveProductDialog: (productId: number) => void;
+  openRemoveProductDialog: (productId: number, onSucces?: () => void) => void;
   closeRemoveProductDialog: () => void;
 
-  editProductDialog: { open: boolean; productId: number };
+  editProductDialog: EditProductDialogProps;
   openEditProductDialog: (productId: number) => void;
   closeEditProductDialog: () => void;
 

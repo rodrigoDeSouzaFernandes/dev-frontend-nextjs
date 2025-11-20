@@ -16,11 +16,7 @@ import { useEditProductDialog } from "./hooks/useEditProductDialog";
 import { Spinner } from "../ui/spinner";
 import ProductForm from "../ProductForm/ProductForm";
 import CustomAlert from "../CustomAlert";
-
-type EditProductDialogProps = {
-  open: boolean;
-  productId: number;
-};
+import { EditProductDialogProps } from "@/types/products.dialogs";
 
 export default function EditProductDialog({
   productId,

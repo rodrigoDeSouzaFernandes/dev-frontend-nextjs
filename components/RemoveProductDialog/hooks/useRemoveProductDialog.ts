@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 type UseRemoveProductDialogProps = {
   closeModal: () => void;
+  onSucces: () => void;
 };
 
 const useRemoveProductDialog = (props: UseRemoveProductDialogProps) => {
@@ -16,6 +17,7 @@ const useRemoveProductDialog = (props: UseRemoveProductDialogProps) => {
     onSuccess: () => {
       toast.success("Product deleted successfully.");
       props.closeModal();
+      props.onSucces();
     },
   });
 
