@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import ProductBreadcrumb from "./ProductBreadcrumb/ProductBreadcrumb";
 import ProductDetails from "@/components/ProductDetails";
+import ProductBreadcrumb from "./ProductBreadcrumb/ProductBreadcrumb";
 
 export default async function ProductDetailsPage({
   params,
