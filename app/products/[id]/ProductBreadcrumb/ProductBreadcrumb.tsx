@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,11 +6,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { useParams } from "next/navigation";
 
-export default function ProductBreadcrumb() {
-  const { id } = useParams();
+interface ProductBreadcrumbProps {
+  productId: number;
+}
 
+export default function ProductBreadcrumb({
+  productId,
+}: ProductBreadcrumbProps) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -24,7 +24,7 @@ export default function ProductBreadcrumb() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>{id}</BreadcrumbPage>
+          <BreadcrumbPage>{productId}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

@@ -10,6 +10,7 @@ import { ProductFormType } from "@/types/products";
 import { formatPriceValue } from "@/utils/formatCurrency";
 import { Textarea } from "../ui/textarea";
 import { Trash } from "lucide-react";
+import Image from "next/image";
 
 type ProductFormProps = {
   form: UseFormReturn<ProductFormType>;
@@ -138,7 +139,7 @@ export default function ProductForm({ form }: ProductFormProps) {
 
                 {imageUri ? (
                   <div className="relative w-40 h-40 rounded-lg overflow-hidden border bg-muted">
-                    <img
+                    <Image
                       src={imageUri}
                       alt="Product image"
                       className="object-contain w-full h-full"
