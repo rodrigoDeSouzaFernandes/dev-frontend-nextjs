@@ -3,9 +3,12 @@
 import { loginFormSchema } from "@/schemas/login/login.schema";
 import { LoginFormType } from "@/types/login";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export const useLoginForm = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const defaultValues = {
     email: "",
     password: "",
@@ -20,5 +23,5 @@ export const useLoginForm = () => {
     alert("form sent");
   };
 
-  return { form, onSubmit };
+  return { form, onSubmit, showPassword, setShowPassword };
 };
