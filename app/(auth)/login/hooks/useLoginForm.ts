@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { UserService } from "@/lib/services/users.service";
+import { usersService } from "@/lib/services/users.service";
 import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { capitalizeFirst } from "@/utils/stringHelper";
@@ -18,7 +18,7 @@ export const useLoginForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const { isPending, mutate: login } = useMutation({
-    mutationFn: UserService.login,
+    mutationFn: usersService.login,
     onSuccess: (data) => {
       console.log(data);
       setCookie("token", data.token);

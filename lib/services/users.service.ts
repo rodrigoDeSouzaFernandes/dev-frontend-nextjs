@@ -5,7 +5,7 @@ type LoginResponse = {
   token: string;
 };
 
-export const UserService = {
+export const usersService = {
   login: async (payload: Login): Promise<LoginResponse> => {
     const response = await api.post("/auth/login", payload);
     return response.data;
