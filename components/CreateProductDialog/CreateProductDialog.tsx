@@ -32,15 +32,17 @@ export default function CreateProductDialog(props: CreateProductDialogProps) {
   return (
     <Dialog
       open={props.open}
-      onOpenChange={() => {
-        closeModal();
-        clearForm();
+      onOpenChange={(open) => {
+        if (!open) {
+          closeModal();
+          clearForm();
+        }
       }}
     >
       <DialogContent className="max-h-[90vh] flex flex-col">
         <DialogTitle>Create product</DialogTitle>
         <DialogDescription>
-          Create the details of your product here.
+          Create your product by filling out all the necessary details below.
         </DialogDescription>
         <ProductForm form={form} />
         {createProductError ? (
