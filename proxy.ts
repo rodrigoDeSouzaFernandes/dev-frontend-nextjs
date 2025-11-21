@@ -3,7 +3,8 @@ import type { NextRequest } from "next/server";
 import { authGuard } from "./lib/authGuard";
 
 export function proxy(req: NextRequest) {
-  authGuard(req);
+  const redirect = authGuard(req);
+  if (redirect) return redirect;
 
   return NextResponse.next();
 }
