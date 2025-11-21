@@ -40,8 +40,8 @@ export default function CreateProductDialog(props: CreateProductDialogProps) {
       }}
     >
       <DialogContent className="max-h-[90vh] flex flex-col">
-        <DialogTitle>Create product</DialogTitle>
-        <DialogDescription>
+        <DialogTitle data-testid="dialog-title">Create Product</DialogTitle>
+        <DialogDescription data-testid="dialog-description">
           Create your product by filling out all the necessary details below.
         </DialogDescription>
         <ProductForm form={form} />
@@ -59,15 +59,17 @@ export default function CreateProductDialog(props: CreateProductDialogProps) {
               closeModal();
               clearForm();
             }}
+            data-testid="cancel-button"
           >
             Cancel
           </Button>
           <Button
             disabled={createProductLoading}
             onClick={form.handleSubmit(handleFormSubmit)}
+            data-testid="create-product-button"
           >
             {createProductLoading ? (
-              <Spinner className="w-24" />
+              <Spinner className="w-24" data-testid="spinner" />
             ) : (
               "Create Product"
             )}
