@@ -1,4 +1,9 @@
 import { loginFormSchema } from "@/schemas/login/login.schema";
 import z from "zod";
 
-type LoginFormType = z.infer<typeof loginFormSchema>;
+export interface Login {
+  username: string;
+  password: string;
+}
+
+export type LoginFormType = z.infer<typeof loginFormSchema>;

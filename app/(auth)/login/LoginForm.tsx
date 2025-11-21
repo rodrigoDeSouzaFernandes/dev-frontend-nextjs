@@ -10,15 +10,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Controller } from "react-hook-form";
 import { useLoginForm } from "./hooks/useLoginForm";
+import { Eye, EyeClosed } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function LoginForm() {
-  const { form, onSubmit } = useLoginForm();
+  const { form, onSubmit, showPassword, setShowPassword, isPending } =
+    useLoginForm();
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
-      <FieldGroup>
+      <FieldGroup className="gap-6">
         <Controller
-          name="email"
+          name="username"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
@@ -27,9 +30,9 @@ export default function LoginForm() {
                 {...field}
                 id={field.name}
                 aria-invalid={fieldState.invalid}
-                placeholder="example@email.com"
+                placeholder="username"
                 autoComplete="off"
-                maxLength={100}
+                maxLength={20}
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -42,20 +45,36 @@ export default function LoginForm() {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
               <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-              <Input
-                {...field}
-                id={field.name}
-                aria-invalid={fieldState.invalid}
-                placeholder="********"
-                autoComplete="off"
-                maxLength={100}
-              />
+              <div className="relative">
+                <Input
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  id={field.name}
+                  aria-invalid={fieldState.invalid}
+                  placeholder="********"
+                  autoComplete="off"
+                  maxLength={20}
+                />
+                <Button
+                  className="absolute right-1 bottom-0 !w-fit px-2 mb-[2px] rounded-s-lg "
+                  variant="ghost"
+                  type="button"
+                  size="icon-sm"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <Eye /> : <EyeClosed />}
+                </Button>
+              </div>
+
               <FieldError errors={[fieldState.error]} />
             </Field>
           )}
         />
       </FieldGroup>
-      <Button className="w-full mt-4">Login</Button>
+      <Button disabled={isPending} className="w-full mt-4">
+        {isPending ? <Spinner /> : "Login"}
+      </Button>
     </form>
   );
 }

@@ -11,8 +11,11 @@ import {
 import { redirect } from "next/navigation";
 
 import { Menu } from "lucide-react";
+import { useLogout } from "@/hooks/useLogout";
 
 export default function Header() {
+  const { logout } = useLogout();
+
   return (
     <header className="bg-white shadow-md">
       <div className="max-w-[1400px] m-auto flex items-center justify-between h-16 p-4">
@@ -41,12 +44,7 @@ export default function Header() {
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => alert("perfil")}>
-                Perfil
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => alert("logout")}>
-                Logout
-              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

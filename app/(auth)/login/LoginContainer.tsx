@@ -9,9 +9,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 export default function LoginContainer() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md relative">
+      <Card className="w-full max-w-md relative gap-4">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Login</CardTitle>
+          <CardTitle className="text-4xl text-center">Login</CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-6 ">
@@ -31,10 +31,10 @@ export default function LoginContainer() {
                     Use these credentials to login:
                   </AlertTitle>
                   <AlertDescription>
-                    <strong>E-mail:</strong> admin@admin.com
+                    <strong>Username:</strong> mor_2314
                   </AlertDescription>
                   <AlertDescription>
-                    <strong>Password:</strong> admin
+                    <strong>Password:</strong> 83r5^_
                   </AlertDescription>
                 </Alert>
               </TooltipContent>

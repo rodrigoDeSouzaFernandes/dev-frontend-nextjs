@@ -146,6 +146,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                         fill
                         alt="Product image"
                         className="object-contain"
+                        sizes="(max-width: 640px) 100vw, 460px"
                       />
                     </div>
 

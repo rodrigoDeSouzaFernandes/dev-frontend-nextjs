@@ -82,12 +82,13 @@ export default function ProductCard({
         </DropdownMenu>
       </div>
       <CardContent className="mt-auto">
-        <div className="relative min-h-40 max-h-60 h-[100%] sm:h-60 m-auto">
+        <div className="relative min-h-40 h-60 max-h-60 h-[100%] sm:h-60 m-auto">
           <Image
             src={image}
             alt={`Image of ${title}`}
             className="object-contain"
             fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         </div>
         <p className="w-full text-right  mt-6">

@@ -44,21 +44,23 @@ export default function EditProductDialog({
   return (
     <Dialog
       open={open}
-      onOpenChange={() => {
-        closeModal();
-        clearForm();
+      onOpenChange={(open) => {
+        if (!open) {
+          closeModal();
+          clearForm();
+        }
       }}
     >
       <DialogContent className="max-h-[90vh] flex flex-col">
         <DialogTitle>Edit product</DialogTitle>
+        <DialogDescription>
+          Edit the details of your product here.
+        </DialogDescription>
+
         {isLoading ? (
           <EditProductDialogSkeleton />
         ) : (
           <>
-            <DialogDescription>
-              Edit the details of your product here.
-            </DialogDescription>
-
             {isError ? (
               <>
                 <CustomAlert
