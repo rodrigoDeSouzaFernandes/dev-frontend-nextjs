@@ -31,10 +31,10 @@ export default function LoginContainer() {
                     Use these credentials to login:
                   </AlertTitle>
                   <AlertDescription>
-                    <strong>E-mail:</strong> admin@admin.com
+                    <strong>Username:</strong> mor_2314
                   </AlertDescription>
                   <AlertDescription>
-                    <strong>Password:</strong> admin
+                    <strong>Password:</strong> 83r5^_
                   </AlertDescription>
                 </Alert>
               </TooltipContent>

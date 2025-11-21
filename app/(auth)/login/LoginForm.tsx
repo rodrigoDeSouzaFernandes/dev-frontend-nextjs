@@ -20,7 +20,7 @@ export default function LoginForm() {
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup className="gap-6">
         <Controller
-          name="email"
+          name="username"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
@@ -29,9 +29,9 @@ export default function LoginForm() {
                 {...field}
                 id={field.name}
                 aria-invalid={fieldState.invalid}
-                placeholder="example@email.com"
+                placeholder="username"
                 autoComplete="off"
-                maxLength={100}
+                maxLength={20}
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -52,7 +52,7 @@ export default function LoginForm() {
                   aria-invalid={fieldState.invalid}
                   placeholder="********"
                   autoComplete="off"
-                  maxLength={100}
+                  maxLength={20}
                 />
                 <Button
                   className="absolute right-1 bottom-0 !w-fit px-2 mb-[2px] rounded-s-lg "
