@@ -17,14 +17,11 @@ export const useLoginForm = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const {
-    isPending,
-    mutate: login,
-  } = useMutation({
+  const { isPending, mutate: login } = useMutation({
     mutationFn: UserService.login,
     onSuccess: (data) => {
       console.log(data);
-      setCookie("next_store_token", data.token);
+      setCookie("token", data.token);
       router.replace("/products");
     },
     onError: (error: AxiosError) => {
