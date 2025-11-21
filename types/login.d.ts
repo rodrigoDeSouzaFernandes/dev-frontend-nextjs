@@ -2,7 +2,7 @@ import { loginFormSchema } from "@/schemas/login/login.schema";
 import z from "zod";
 
 export interface Login {
-  email: string;
+  username: string;
   password: string;
 }
 

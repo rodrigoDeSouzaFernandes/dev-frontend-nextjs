@@ -11,10 +11,11 @@ import { Input } from "@/components/ui/input";
 import { Controller } from "react-hook-form";
 import { useLoginForm } from "./hooks/useLoginForm";
 import { Eye, EyeClosed } from "lucide-react";
-import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function LoginForm() {
-  const { form, onSubmit, showPassword, setShowPassword } = useLoginForm();
+  const { form, onSubmit, showPassword, setShowPassword, isPending } =
+    useLoginForm();
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -71,7 +72,9 @@ export default function LoginForm() {
           )}
         />
       </FieldGroup>
-      <Button className="w-full mt-4">Login</Button>
+      <Button disabled={isPending} className="w-full mt-4">
+        {isPending ? <Spinner /> : "Login"}
+      </Button>
     </form>
   );
 }
