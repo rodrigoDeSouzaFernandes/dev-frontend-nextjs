@@ -20,13 +20,10 @@ export const useLoginForm = () => {
   const { isPending, mutate: login } = useMutation({
     mutationFn: usersService.login,
     onSuccess: (data) => {
-      console.log(data);
       setCookie("token", data.token);
       router.replace("/products");
     },
     onError: (error: AxiosError) => {
-      console.log(error);
-
       const message =
         typeof error.response?.data === "string"
           ? error.response.data
@@ -38,7 +35,7 @@ export const useLoginForm = () => {
   });
 
   const defaultValues = {
-    email: "",
+    username: "",
     password: "",
   };
 
