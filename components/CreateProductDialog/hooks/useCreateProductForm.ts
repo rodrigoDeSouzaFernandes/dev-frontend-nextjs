@@ -1,14 +1,15 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ControllerRenderProps, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Product } from "@/types/products";
-import { useCallback, useEffect } from "react";
-import { formatPriceValue, parsePriceValue } from "@/utils/formatCurrency";
+import { useCallback } from "react";
+import { parsePriceValue } from "@/utils/formatCurrency";
 import { producFormSchema } from "@/schemas/product/product.schema";
 import { useMutation } from "@tanstack/react-query";
 import { productsService } from "@/lib/services/products.service";
 import { toast } from "sonner";
 import { generateFakeImageUrl } from "@/utils/generateFakeImageUrl";
+import { UseCreateProductFormReturn } from "@/types/hooks";
 
 interface UseCreateProductFormProps {
   closeModal: () => void;
@@ -17,9 +18,7 @@ export type ProductFormType = z.infer<typeof producFormSchema>;
 
 export const useCreateProductForm = ({
   closeModal,
-}: UseCreateProductFormProps) => {
-
-
+}: UseCreateProductFormProps): UseCreateProductFormReturn => {
   const form = useForm<ProductFormType>({
     resolver: zodResolver(producFormSchema),
     defaultValues: {
@@ -31,7 +30,7 @@ export const useCreateProductForm = ({
     },
   });
 
-  const clearForm = useCallback(() => {
+  const clearForm = useCallback((): void => {
     form.reset({
       title: "",
       category: "",
@@ -39,9 +38,9 @@ export const useCreateProductForm = ({
       description: "",
       image: "",
     });
-  }, []);
+  }, [form]);
 
-    const {
+  const {
     isPending: createProductLoading,
     isError: createProductError,
     mutate: createProduct,

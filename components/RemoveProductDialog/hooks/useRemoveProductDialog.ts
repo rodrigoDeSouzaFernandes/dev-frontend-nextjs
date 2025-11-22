@@ -1,13 +1,16 @@
 import { productsService } from "@/lib/services/products.service";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { UseRemoveProductDialogReturn } from "@/types/hooks";
 
 type UseRemoveProductDialogProps = {
   closeModal: () => void;
   onSucces: () => void;
 };
 
-const useRemoveProductDialog = (props: UseRemoveProductDialogProps) => {
+const useRemoveProductDialog = (
+  props: UseRemoveProductDialogProps
+): UseRemoveProductDialogReturn => {
   const {
     isPending,
     isError,

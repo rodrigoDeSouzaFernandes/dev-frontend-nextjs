@@ -25,7 +25,7 @@ export default function LoginForm() {
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
-              <FieldLabel htmlFor={field.name}>E-mail</FieldLabel>
+              <FieldLabel htmlFor={field.name}>Username</FieldLabel>
               <Input
                 {...field}
                 id={field.name}
@@ -33,6 +33,7 @@ export default function LoginForm() {
                 placeholder="username"
                 autoComplete="off"
                 maxLength={20}
+                data-testid="username-input"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -54,6 +55,7 @@ export default function LoginForm() {
                   placeholder="********"
                   autoComplete="off"
                   maxLength={20}
+                  data-testid="password-input"
                 />
                 <Button
                   className="absolute right-1 bottom-0 !w-fit px-2 mb-[2px] rounded-s-lg "

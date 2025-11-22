@@ -17,11 +17,13 @@ type ProductFormProps = {
   form: UseFormReturn<ProductFormType>;
 };
 
-export default function ProductForm({ form }: ProductFormProps) {
+export default function ProductForm({
+  form,
+}: ProductFormProps): React.ReactElement {
   async function handleImageChange(
     e: React.ChangeEvent<HTMLInputElement>,
     field: ControllerRenderProps<ProductFormType, "image">
-  ) {
+  ): Promise<void> {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -33,8 +35,10 @@ export default function ProductForm({ form }: ProductFormProps) {
     }
 
     const reader = new FileReader();
-    reader.onloadend = () => {
-      field.onChange(reader.result);
+    reader.onloadend = (): void => {
+      if (typeof reader.result === "string") {
+        field.onChange(reader.result);
+      }
     };
     reader.readAsDataURL(file);
   }
@@ -55,6 +59,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                 placeholder="Product title"
                 autoComplete="off"
                 maxLength={100}
+                data-testid="title-input"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -73,6 +78,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                 placeholder="Product category"
                 autoComplete="off"
                 maxLength={50}
+                data-testid="category-input"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -104,6 +110,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                 onChange={(e) => {
                   field.onChange(formatPriceValue(e.target.value));
                 }}
+                data-testid="price-input"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -123,6 +130,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                 autoComplete="off"
                 className="resize-none"
                 maxLength={500}
+                data-testid="description-textarea"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -147,6 +155,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                         alt="Product image"
                         className="object-contain"
                         sizes="(max-width: 640px) 100vw, 460px"
+                        data-testid="product-image"
                       />
                     </div>
 
@@ -158,6 +167,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                       }}
                       className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 hover:text-white text-white"
                       aria-label="Remove selected image"
+                      data-testid="remove-image-button"
                     >
                       <Trash className="w-4 h-4" />
                     </Button>
@@ -169,6 +179,7 @@ export default function ProductForm({ form }: ProductFormProps) {
                     aria-invalid={fieldState.invalid}
                     accept="image/*"
                     onChange={(e) => handleImageChange(e, field)}
+                    data-testid="file-input"
                   />
                 )}
                 <FieldError errors={[fieldState.error]} />

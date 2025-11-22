@@ -1,12 +1,11 @@
+import React from "react";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-
 import { useProductDetails } from "./hooks/useProductDetails";
 import ProductDetailsActions from "./ProductDetailsActions";
 import { formatPriceValue } from "@/utils/formatCurrency";
-import { Alert } from "../ui/alert";
 import CustomAlert from "../CustomAlert";
 
 interface UseProductDetailsProps {
@@ -15,7 +14,7 @@ interface UseProductDetailsProps {
 
 export default async function ProductDetails({
   productId,
-}: UseProductDetailsProps) {
+}: UseProductDetailsProps): Promise<React.ReactElement> {
   const { product, error } = await useProductDetails({ productId });
 
   return (
@@ -37,6 +36,7 @@ export default async function ProductDetails({
                 className="object-contain p-4"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 loading="eager"
+                data-testid="product-image"
               />
             </CardContent>
           </Card>

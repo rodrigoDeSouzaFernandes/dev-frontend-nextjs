@@ -22,7 +22,7 @@ function RemoveProductDialog({
   productId,
   open,
   onSucces = () => {},
-}: RemoveProductDialogProps) {
+}: RemoveProductDialogProps): React.ReactElement {
   const closeModal = useModalStore((state) => state.closeRemoveProductDialog);
 
   const { isPending, isError, deleteProduct } = useRemoveProductDialog({
@@ -59,7 +59,7 @@ function RemoveProductDialog({
             className="bg-red-700 text-white hover:bg-red-600 cursor-pointer sm:w-32"
             onClick={() => deleteProduct(productId)}
           >
-            {isPending ? <Spinner /> : "Delete product"}
+            {isPending ? <Spinner data-testid="spinner" /> : "Delete product"}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

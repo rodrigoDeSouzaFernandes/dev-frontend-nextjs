@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { productsService } from "@/lib/services/products.service";
 import { Product } from "@/types/products";
+import { UseEditProductDialogReturn } from "@/types/hooks";
 
 interface UseEditProductDialogProps {
   productId: number;
@@ -8,7 +9,7 @@ interface UseEditProductDialogProps {
 
 export const useEditProductDialog = ({
   productId,
-}: UseEditProductDialogProps) => {
+}: UseEditProductDialogProps): UseEditProductDialogReturn => {
   const shouldFetch = typeof productId === "number" && productId > 0;
 
   const {

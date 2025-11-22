@@ -1,12 +1,11 @@
+import React from "react";
 import useProductsList from "./hooks/useProductsList";
 import ProductCard from "../ProductCard/ProductCard";
 import { AlertTriangleIcon } from "lucide-react";
 import ProductsListHeader from "./ProductsListHeader";
 import CustomAlert from "../CustomAlert";
 
-type ProductsListProps = {};
-
-export default async function ProductsList(props: ProductsListProps) {
+export default async function ProductsList(): Promise<React.ReactElement> {
   const { products, error } = await useProductsList();
 
   if (error) {
@@ -15,7 +14,7 @@ export default async function ProductsList(props: ProductsListProps) {
         <AlertTriangleIcon className="h-5" />
         <CustomAlert
           variant="destructive"
-          title="Somehing Went Wrong"
+          title="Something Went Wrong"
           description="We were unable to load the products at this time. This may be due to a temporary network issue on your side or a problem with our servers. Please check your connection and try again in a few minutes."
         />
       </div>
