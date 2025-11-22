@@ -90,7 +90,7 @@ describe("useCreateProductForm hook", () => {
     });
   });
 
-  it("should allow manually clearing the form", () => {
+  it("should allow clearing the form", () => {
     const { result } = renderHook(() => useCreateProductForm({ closeModal }), {
       wrapper: createWrapper(),
     });
