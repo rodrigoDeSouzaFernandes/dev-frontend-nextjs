@@ -4,7 +4,7 @@ const formatCurrencyUSD = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
 }).format;
 
-export function formatPriceValue(value: string) {
+export function formatPriceValue(value: string): string {
   const digits = value.replace(/\D/g, "");
   const number = Number(digits) / 100;
   return formatCurrencyUSD(number);

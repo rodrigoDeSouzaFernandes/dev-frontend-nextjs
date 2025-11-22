@@ -4,9 +4,7 @@ import { AlertTriangleIcon } from "lucide-react";
 import ProductsListHeader from "./ProductsListHeader";
 import CustomAlert from "../CustomAlert";
 
-type ProductsListProps = {};
-
-export default async function ProductsList(props: ProductsListProps) {
+export default async function ProductsList() {
   const { products, error } = await useProductsList();
 
   if (error) {

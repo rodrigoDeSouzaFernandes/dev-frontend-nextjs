@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { productsService } from "@/lib/services/products.service";
 import { toast } from "sonner";
 import { generateFakeImageUrl } from "@/utils/generateFakeImageUrl";
+import { UseEditProductFormReturn } from "@/types/hooks";
 
 interface UseEditProductFormProps {
   productData: Product | undefined;
@@ -19,7 +20,7 @@ export const useEditProductForm = ({
   productData,
   productId,
   closeModal,
-}: UseEditProductFormProps) => {
+}: UseEditProductFormProps): UseEditProductFormReturn => {
   const form = useForm<ProductFormType>({
     resolver: zodResolver(producFormSchema),
     defaultValues: {
@@ -31,7 +32,7 @@ export const useEditProductForm = ({
     },
   });
 
-  const clearForm = useCallback(() => {
+  const clearForm = useCallback((): void => {
     form.reset({
       title: "",
       category: "",
@@ -39,7 +40,7 @@ export const useEditProductForm = ({
       description: "",
       image: "",
     });
-  }, []);
+  }, [form]);
 
   const {
     isPending: updateProductLoading,

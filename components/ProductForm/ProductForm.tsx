@@ -21,7 +21,7 @@ export default function ProductForm({ form }: ProductFormProps) {
   async function handleImageChange(
     e: React.ChangeEvent<HTMLInputElement>,
     field: ControllerRenderProps<ProductFormType, "image">
-  ) {
+  ): Promise<void> {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -33,8 +33,10 @@ export default function ProductForm({ form }: ProductFormProps) {
     }
 
     const reader = new FileReader();
-    reader.onloadend = () => {
-      field.onChange(reader.result);
+    reader.onloadend = (): void => {
+      if (typeof reader.result === "string") {
+        field.onChange(reader.result);
+      }
     };
     reader.readAsDataURL(file);
   }

@@ -8,12 +8,13 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { usersService } from "@/lib/services/users.service";
 import { toast } from "sonner";
-import { AxiosError } from "axios";
 import { capitalizeFirst } from "@/utils/stringHelper";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
+import { ApiError } from "@/types/api";
+import { UseLoginFormReturn } from "@/types/hooks";
 
-export const useLoginForm = () => {
+export const useLoginForm = (): UseLoginFormReturn => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -23,11 +24,12 @@ export const useLoginForm = () => {
       setCookie("token", data.token);
       router.replace("/products");
     },
-    onError: (error: AxiosError) => {
+    onError: (error: ApiError) => {
+      const errorData = error.response?.data;
       const message =
-        typeof error.response?.data === "string"
-          ? error.response.data
-          : (error.response?.data as any)?.message ||
+        typeof errorData === "string"
+          ? errorData
+          : errorData?.message || errorData?.error ||
             "Network error. try again in a moment";
 
       toast.error(capitalizeFirst(message));

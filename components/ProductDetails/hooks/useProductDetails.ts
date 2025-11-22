@@ -1,5 +1,6 @@
 import { productsService } from "@/lib/services/products.service";
 import { Product } from "@/types/products";
+import { UseProductDetailsReturn } from "@/types/hooks";
 
 interface UseProductDetailsProps {
   productId: number;
@@ -7,7 +8,7 @@ interface UseProductDetailsProps {
 
 export const useProductDetails = async ({
   productId,
-}: UseProductDetailsProps) => {
+}: UseProductDetailsProps): Promise<UseProductDetailsReturn> => {
   try {
     const product: Product = await productsService.getById(productId);
     return { product, error: false };

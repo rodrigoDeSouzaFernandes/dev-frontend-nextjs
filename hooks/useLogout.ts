@@ -1,10 +1,14 @@
 import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
-export const useLogout = () => {
+interface UseLogoutReturn {
+  logout: () => void;
+}
+
+export const useLogout = (): UseLogoutReturn => {
   const router = useRouter();
 
-  const logout = () => {
+  const logout = (): void => {
     deleteCookie("token");
     router.replace("/login");
   };
