@@ -17,7 +17,9 @@ type ProductFormProps = {
   form: UseFormReturn<ProductFormType>;
 };
 
-export default function ProductForm({ form }: ProductFormProps) {
+export default function ProductForm({
+  form,
+}: ProductFormProps): React.ReactElement {
   async function handleImageChange(
     e: React.ChangeEvent<HTMLInputElement>,
     field: ControllerRenderProps<ProductFormType, "image">

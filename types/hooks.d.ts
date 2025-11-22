@@ -37,3 +37,9 @@ export interface UseProductDetailsReturn {
   product: Product | null;
   error: boolean;
 }
+
+export interface UseRemoveProductDialogReturn {
+  isPending: boolean;
+  isError: boolean;
+  deleteProduct: (id: number) => void;
+}

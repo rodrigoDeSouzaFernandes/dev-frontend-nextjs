@@ -1,3 +1,4 @@
+import React from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircleIcon } from "lucide-react";
 
@@ -11,7 +12,7 @@ export default function CustomAlert({
   variant,
   title,
   description,
-}: CustomAlertProps) {
+}: CustomAlertProps): React.ReactElement {
   return (
     <Alert data-testid="custom-alert" variant={variant}>
       <AlertCircleIcon />

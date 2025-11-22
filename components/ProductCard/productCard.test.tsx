@@ -27,10 +27,12 @@ const props: ProductCardProps = {
   },
 };
 
+const mockReplace = jest.fn()
+
 describe("ProductCard", () => {
   beforeEach(() => {
     mockUseRouter.mockReturnValue({
-      replace: jest.fn(),
+      replace: mockReplace,
       back: jest.fn(),
       forward: jest.fn(),
       refresh: jest.fn(),
@@ -69,14 +71,13 @@ describe("ProductCard", () => {
   it("should redirect user to product details page when see more button is clicked", async () => {
     render(<ProductCard {...props} />);
 
-    const router = mockUseRouter.mock.results[0]?.value;
     const user = userEvent.setup();
     const seeMoreButton = screen.getByTestId("see-more-button");
 
     await user.click(seeMoreButton);
 
-    expect(router.replace).toHaveBeenCalledTimes(1);
-    expect(router.replace).toHaveBeenCalledWith(`products/${props.product.id}`);
+    expect(mockReplace).toHaveBeenCalledTimes(1);
+    expect(mockReplace).toHaveBeenCalledWith(`products/${props.product.id}`);
   });
 
   it("should open edit product dialog", async () => {

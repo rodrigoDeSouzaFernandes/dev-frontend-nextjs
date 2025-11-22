@@ -1,10 +1,11 @@
 "use client";
 
+import React from "react";
 import { useModalStore } from "@/stores/useModalStore";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
 
-export default function ProductsListHeader() {
+export default function ProductsListHeader(): React.ReactElement {
   const openCreateProductModal = useModalStore(
     (store) => store.openCreateProductDialog
   );

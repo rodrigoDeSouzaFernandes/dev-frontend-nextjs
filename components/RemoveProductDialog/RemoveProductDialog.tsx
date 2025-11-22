@@ -22,7 +22,7 @@ function RemoveProductDialog({
   productId,
   open,
   onSucces = () => {},
-}: RemoveProductDialogProps) {
+}: RemoveProductDialogProps): React.ReactElement {
   const closeModal = useModalStore((state) => state.closeRemoveProductDialog);
 
   const { isPending, isError, deleteProduct } = useRemoveProductDialog({

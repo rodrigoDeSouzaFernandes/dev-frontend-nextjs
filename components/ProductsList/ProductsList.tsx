@@ -1,10 +1,11 @@
+import React from "react";
 import useProductsList from "./hooks/useProductsList";
 import ProductCard from "../ProductCard/ProductCard";
 import { AlertTriangleIcon } from "lucide-react";
 import ProductsListHeader from "./ProductsListHeader";
 import CustomAlert from "../CustomAlert";
 
-export default async function ProductsList() {
+export default async function ProductsList(): Promise<React.ReactElement> {
   const { products, error } = await useProductsList();
 
   if (error) {

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -16,7 +17,7 @@ import { useLogout } from "@/hooks/useLogout";
 import userImage from "@/assets/user.webp";
 import ThemeModeToggle from "../ThemeModeToogle";
 
-export default function Header() {
+export default function Header(): React.ReactElement {
   const { logout } = useLogout();
 
   return (

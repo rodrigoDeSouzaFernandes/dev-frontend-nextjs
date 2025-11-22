@@ -1,12 +1,13 @@
 "use client";
 
+import React from "react";
 import { Button } from "../ui/button";
 import { Pencil, Trash } from "lucide-react";
 
 import { useModalStore } from "@/stores/useModalStore";
 import { useParams, useRouter } from "next/navigation";
 
-export default function ProductDetailsActions() {
+export default function ProductDetailsActions(): React.ReactElement {
   const { id } = useParams();
   const router = useRouter();
   const openEditProductDialog = useModalStore(

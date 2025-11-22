@@ -1,6 +1,7 @@
+import React from "react";
 import { Skeleton } from "../ui/skeleton";
 
-export default function EditProductDialogSkeleton({}) {
+export default function EditProductDialogSkeleton(): React.ReactElement {
   return (
     <>
       <Skeleton data-testid="skeleton" className="h-8 w-1/3 rounded" />

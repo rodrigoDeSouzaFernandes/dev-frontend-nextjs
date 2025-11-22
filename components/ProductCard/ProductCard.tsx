@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   Card,
   CardAction,
@@ -30,7 +31,7 @@ export type ProductCardProps = {
 
 export default function ProductCard({
   product: { title, description, image, price, id },
-}: ProductCardProps) {
+}: ProductCardProps): React.ReactElement {
   const router = useRouter();
   const openRemoveProductDialog = useModalStore(
     (state) => state.openRemoveProductDialog
@@ -96,7 +97,7 @@ export default function ProductCard({
         <p className="w-full text-right  mt-6">
           Price:{" "}
           <span className="font-semibold text-xl text-right ">
-            {formatPriceValue(price.toString())}
+            {formatPriceValue(String(price))}
           </span>
         </p>
       </CardContent>

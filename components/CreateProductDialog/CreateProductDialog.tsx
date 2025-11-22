@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +17,9 @@ import { Spinner } from "../ui/spinner";
 import CustomAlert from "../CustomAlert";
 import { CreateProductDialogProps } from "@/types/products.dialogs";
 
-export default function CreateProductDialog(props: CreateProductDialogProps) {
+export default function CreateProductDialog(
+  props: CreateProductDialogProps
+): React.ReactElement {
   const closeModal = useModalStore((state) => state.closeCreateProductDialog);
 
   const {

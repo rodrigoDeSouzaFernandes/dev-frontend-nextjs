@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -13,7 +14,7 @@ interface UseProductDetailsProps {
 
 export default async function ProductDetails({
   productId,
-}: UseProductDetailsProps) {
+}: UseProductDetailsProps): Promise<React.ReactElement> {
   const { product, error } = await useProductDetails({ productId });
 
   return (
