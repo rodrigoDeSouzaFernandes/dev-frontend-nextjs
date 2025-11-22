@@ -11,7 +11,7 @@ describe("useProductDetails", () => {
     jest.clearAllMocks();
   });
 
-  it("should return product when api response is success", async () => {
+  it("should return product list when API succeeds", async () => {
     const mockProduct: Product = {
       id: 1,
       title: "Test Product",
@@ -33,7 +33,7 @@ describe("useProductDetails", () => {
     });
   });
 
-  it("should return {error: true} when api call fails", async () => {
+  it("should return product = null and error = true when API fails", async () => {
     mockedGetById.mockRejectedValue(new Error("Erro"));
 
     const response = await useProductDetails({ productId: 1 });
