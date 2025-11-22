@@ -4,7 +4,6 @@ import RemoveProductDialog from "./RemoveProductDialog";
 import useRemoveProductDialog from "./hooks/useRemoveProductDialog";
 import { useModalStore } from "@/stores/useModalStore";
 
-// Mock do hook
 jest.mock("./hooks/useRemoveProductDialog");
 jest.mock("@/stores/useModalStore");
 
@@ -16,7 +15,6 @@ describe("RemoveProductDialog", () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    // Mock do store
     (useModalStore as unknown as jest.Mock).mockReturnValue(closeModal);
   });
 

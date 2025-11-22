@@ -23,15 +23,21 @@ export default function ModalRoot() {
 
   return (
     <>
-      <React.Suspense fallback={<LoadingFallback />}>
-        <RemoveProductDialog {...removeProductDialogProps} />
-      </React.Suspense>
-      <React.Suspense fallback={<LoadingFallback />}>
-        <EditProductDialog {...editProductDialogProps} />
-      </React.Suspense>
-      <React.Suspense fallback={<LoadingFallback />}>
-        <CreateProductDialog {...createProductDialogProps} />
-      </React.Suspense>
+      {removeProductDialogProps.open && (
+        <React.Suspense fallback={<LoadingFallback />}>
+          <RemoveProductDialog {...removeProductDialogProps} />
+        </React.Suspense>
+      )}
+      {editProductDialogProps.open && (
+        <React.Suspense fallback={<LoadingFallback />}>
+          <EditProductDialog {...editProductDialogProps} />
+        </React.Suspense>
+      )}
+      {createProductDialogProps.open && (
+        <React.Suspense fallback={<LoadingFallback />}>
+          <CreateProductDialog {...createProductDialogProps} />
+        </React.Suspense>
+      )}
     </>
   );
 }
