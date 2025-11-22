@@ -59,6 +59,7 @@ export default function ProductForm({
                 placeholder="Product title"
                 autoComplete="off"
                 maxLength={100}
+                data-testid="title-input"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -77,6 +78,7 @@ export default function ProductForm({
                 placeholder="Product category"
                 autoComplete="off"
                 maxLength={50}
+                data-testid="category-input"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -108,6 +110,7 @@ export default function ProductForm({
                 onChange={(e) => {
                   field.onChange(formatPriceValue(e.target.value));
                 }}
+                data-testid="price-input"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -127,6 +130,7 @@ export default function ProductForm({
                 autoComplete="off"
                 className="resize-none"
                 maxLength={500}
+                data-testid="description-textarea"
               />
               <FieldError errors={[fieldState.error]} />
             </Field>
@@ -151,6 +155,7 @@ export default function ProductForm({
                         alt="Product image"
                         className="object-contain"
                         sizes="(max-width: 640px) 100vw, 460px"
+                        data-testid="product-image"
                       />
                     </div>
 
@@ -162,6 +167,7 @@ export default function ProductForm({
                       }}
                       className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 hover:text-white text-white"
                       aria-label="Remove selected image"
+                      data-testid="remove-image-button"
                     >
                       <Trash className="w-4 h-4" />
                     </Button>
@@ -173,6 +179,7 @@ export default function ProductForm({
                     aria-invalid={fieldState.invalid}
                     accept="image/*"
                     onChange={(e) => handleImageChange(e, field)}
+                    data-testid="file-input"
                   />
                 )}
                 <FieldError errors={[fieldState.error]} />
