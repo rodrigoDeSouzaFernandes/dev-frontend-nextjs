@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Store
 
-## Getting Started
+This project is a frontend application built with **Next.js**, using React, TypeScript, and TailwindCSS. It includes state management with Zustand, forms with React Hook Form, dialogs and dropdowns with Radix UI, theme management with next-themes, icons with Lucide React, and notifications with Sonner. Additionally, it has tests with Jest and React Testing Library (RTL).
 
-First, run the development server:
+# Technologies Used
 
-```bash
+Next.js 16, React 19, TypeScript 5, TailwindCSS 4, Zustand, React Hook Form, React Query (tanstack), Shadcn UI, Axios, Zod, Jest, React Testing Library.
+
+# Prerequisites
+
+Before running this project, make sure you have installed:
+
+- [Node.js](https://nodejs.org/) (version 18 or higher recommended)
+- [pnpm](https://pnpm.io/) (for managing dependencies)
+
+# Getting Started
+
+Follow these steps to run the project locally:
+
+## 1. Clone the repository
+
+```
+git clone git@github.com:rodrigoDeSouzaFernandes/dev-frontend-nextjs.git
+```
+
+## 2. Navigate to the project folder
+
+```
+cd dev-frontend-nextjs
+```
+
+Replace "dev-frontend-nextjs" with the folder name you used if it's different.
+
+## 3. Install dependencies
+
+This project uses **pnpm**, but you can also use npm or yarn:
+
+```
+pnpm install
+# or
+npm install
+# or
+yarn
+```
+
+## 4. Configure environment variables
+
+Create a `.env` file in the root of the project with the following content:
+
+```
+NEXT_PUBLIC_API_URL=https://fakestoreapi.com
+```
+
+## 5. Run the development server
+
+```
+pnpm dev
+# or
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Build for production**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+pnpm build
+```
 
-## Learn More
+- **Start production server locally**
 
-To learn more about Next.js, take a look at the following resources:
+```
+pnpm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Run ESLint**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+pnpm lint
+```
 
-## Deploy on Vercel
+- **Run tests**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+pnpm test
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Run tests in watch mode**
+
+```
+pnpm test:watch
+```
+
+# Notes
+
+- Make sure the `.env` file is present before running the project.
+- PNPM is preferred, but npm or yarn also work.

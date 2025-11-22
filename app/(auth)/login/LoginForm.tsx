@@ -1,0 +1,82 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Controller } from "react-hook-form";
+import { useLoginForm } from "./hooks/useLoginForm";
+import { Eye, EyeClosed } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
+
+export default function LoginForm() {
+  const { form, onSubmit, showPassword, setShowPassword, isPending } =
+    useLoginForm();
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <FieldGroup className="gap-6">
+        <Controller
+          name="username"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid} className="gap-1">
+              <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+              <Input
+                {...field}
+                id={field.name}
+                aria-invalid={fieldState.invalid}
+                placeholder="username"
+                autoComplete="off"
+                maxLength={20}
+                data-testid="username-input"
+              />
+              <FieldError errors={[fieldState.error]} />
+            </Field>
+          )}
+        />
+
+        <Controller
+          name="password"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid} className="gap-1">
+              <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+              <div className="relative">
+                <Input
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  id={field.name}
+                  aria-invalid={fieldState.invalid}
+                  placeholder="********"
+                  autoComplete="off"
+                  maxLength={20}
+                  data-testid="password-input"
+                />
+                <Button
+                  className="absolute right-1 bottom-0 !w-fit px-2 mb-[2px] rounded-s-lg "
+                  variant="ghost"
+                  type="button"
+                  size="icon-sm"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <Eye /> : <EyeClosed />}
+                </Button>
+              </div>
+
+              <FieldError errors={[fieldState.error]} />
+            </Field>
+          )}
+        />
+      </FieldGroup>
+      <Button disabled={isPending} className="w-full mt-4">
+        {isPending ? <Spinner /> : "Login"}
+      </Button>
+    </form>
+  );
+}
