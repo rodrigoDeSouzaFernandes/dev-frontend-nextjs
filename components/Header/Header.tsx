@@ -42,7 +42,7 @@ export default function Header() {
           <ThemeModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Avatar className="cursor-pointer">
+              <Avatar className="cursor-pointer" data-testid="header-avatar">
                 <AvatarImage src={userImage.src} alt="User" />
                 <AvatarFallback>RC</AvatarFallback>
               </Avatar>
