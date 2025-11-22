@@ -11,7 +11,6 @@ export default async function ProductsList(): Promise<React.ReactElement> {
   if (error) {
     return (
       <div className="flex items-center gap-2">
-        <AlertTriangleIcon className="h-5" />
         <CustomAlert
           variant="destructive"
           title="Something Went Wrong"
