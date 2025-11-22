@@ -12,7 +12,7 @@ export default function ProductsListHeader(): React.ReactElement {
 
   return (
     <section className="mb-6 flex">
-      <h1 className="font-bold text-5xl">Produtos</h1>
+      <h1 className="font-bold text-5xl">Products</h1>
       <Button className="ml-auto self-center" onClick={openCreateProductModal}>
         <Plus />
         Create New Product
