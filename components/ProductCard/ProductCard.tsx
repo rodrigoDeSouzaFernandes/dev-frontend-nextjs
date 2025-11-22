@@ -24,7 +24,7 @@ import { formatPriceValue } from "@/utils/formatCurrency";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-type ProductCardProps = {
+export type ProductCardProps = {
   product: Product;
 };
 
@@ -54,7 +54,7 @@ export default function ProductCard({
       <div className="absolute top-0 right-0 m-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="cursor-pointer">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" data-testid="open-card-actions">
               <MoreVertical className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
@@ -67,6 +67,7 @@ export default function ProductCard({
               onClick={() => {
                 openEditProductDialog(id);
               }}
+              data-testid="open-edit-product-dialog"
             >
               Edit
             </DropdownMenuItem>
@@ -75,6 +76,7 @@ export default function ProductCard({
               onClick={() => {
                 openRemoveProductDialog(id);
               }}
+              data-testid="open-remove-product-dialog"
             >
               Delete
             </DropdownMenuItem>
@@ -103,6 +105,7 @@ export default function ProductCard({
           type="submit"
           className="w-full"
           onClick={() => router.replace(`products/${id}`)}
+          data-testid="see-more-button"
         >
           See more
         </Button>
