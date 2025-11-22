@@ -13,11 +13,14 @@ import { redirect } from "next/navigation";
 import { Menu } from "lucide-react";
 import { useLogout } from "@/hooks/useLogout";
 
+import userImage from "@/assets/user.webp";
+import ThemeModeToggle from "../ThemeModeToogle";
+
 export default function Header() {
   const { logout } = useLogout();
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="shadow-md bg-muted/70">
       <div className="max-w-[1400px] m-auto flex items-center justify-between h-16 p-4">
         <div className="flex items-center gap-4">
           <Button
@@ -36,15 +39,18 @@ export default function Header() {
           </Button>
         </div>
         <div className="flex items-center gap-4">
+          <ThemeModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Avatar>
-                <AvatarImage src="" alt="User" />
+              <Avatar className="cursor-pointer">
+                <AvatarImage src={userImage.src} alt="User" />
                 <AvatarFallback>RC</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem className="cursor-pointer" onClick={logout}>Logout</DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" onClick={logout}>
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
