@@ -1,7 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircleIcon } from "lucide-react";
 
-type ErrorAlertProps = {
+export type CustomAlertProps = {
   variant?: "default" | "destructive" | null | undefined;
   title?: string;
   description?: string;
@@ -11,9 +11,9 @@ export default function CustomAlert({
   variant,
   title,
   description,
-}: ErrorAlertProps) {
+}: CustomAlertProps) {
   return (
-    <Alert variant={variant}>
+    <Alert data-testid="custom-alert" variant={variant}>
       <AlertCircleIcon />
       <AlertTitle>{title}</AlertTitle>
       <AlertDescription>{description}</AlertDescription>
