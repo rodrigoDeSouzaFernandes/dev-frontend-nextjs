@@ -148,7 +148,7 @@ describe("ProductsService", () => {
     it("should successfully delete the product", async () => {
       (api.delete as jest.Mock).mockResolvedValue(undefined);
       const result = await productsService.delete(1);
-      expect(result).toBeUndefined();
+      expect(result).toBe(1);
     });
 
     it("should handle errors correctly", async () => {
