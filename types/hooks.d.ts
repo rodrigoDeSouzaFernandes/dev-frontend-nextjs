@@ -34,8 +34,9 @@ export interface UseLoginFormReturn {
 }
 
 export interface UseProductDetailsReturn {
-  product: Product | null;
-  error: boolean;
+  product: product | null;
+  isLoading: boolean;
+  isError: boolean;
 }
 
 export interface UseRemoveProductDialogReturn {

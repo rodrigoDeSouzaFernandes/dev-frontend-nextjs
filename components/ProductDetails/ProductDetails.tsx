@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,19 +8,22 @@ import { useProductDetails } from "./hooks/useProductDetails";
 import ProductDetailsActions from "./ProductDetailsActions";
 import { formatPriceValue } from "@/utils/formatCurrency";
 import CustomAlert from "../CustomAlert";
+import ProductDetailsSkeleton from "./ProductDetailsSkeleton";
 
 interface UseProductDetailsProps {
   productId: number;
 }
 
-export default async function ProductDetails({
+export default function ProductDetails({
   productId,
-}: UseProductDetailsProps): Promise<React.ReactElement> {
-  const { product, error } = await useProductDetails({ productId });
+}: UseProductDetailsProps): React.ReactElement {
+  const { product, isError, isLoading } = useProductDetails({ productId });
+
+  if (isLoading) return <ProductDetailsSkeleton />;
 
   return (
     <main className="max-w-[1400px] m-auto p-4 pt-8">
-      {error ? (
+      {isError ? (
         <CustomAlert
           variant="destructive"
           title="Somehing Went Wrong"
