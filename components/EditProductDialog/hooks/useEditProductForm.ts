@@ -4,7 +4,7 @@ import { Product, ProductFormType } from "@/types/products";
 import { useCallback, useEffect } from "react";
 import { formatPriceValue, parsePriceValue } from "@/utils/formatCurrency";
 import { producFormSchema } from "@/schemas/product/product.schema";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { productsService } from "@/lib/services/products.service";
 import { toast } from "sonner";
 import { generateFakeImageUrl } from "@/utils/generateFakeImageUrl";
@@ -21,6 +21,8 @@ export const useEditProductForm = ({
   productId,
   closeModal,
 }: UseEditProductFormProps): UseEditProductFormReturn => {
+  const queryClient = useQueryClient();
+
   const form = useForm<ProductFormType>({
     resolver: zodResolver(producFormSchema),
     defaultValues: {
@@ -48,10 +50,13 @@ export const useEditProductForm = ({
     mutate: updateProduct,
   } = useMutation({
     mutationFn: productsService.update,
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success("Product updated successfully.");
       closeModal();
       clearForm();
+      await queryClient.invalidateQueries({ queryKey: ["products"] });
+      await queryClient.invalidateQueries({ queryKey: ["product"] });
+      await queryClient.removeQueries({ queryKey: ["product"] });
     },
   });
 

@@ -1,5 +1,5 @@
 import { productsService } from "@/lib/services/products.service";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { UseRemoveProductDialogReturn } from "@/types/hooks";
 
@@ -11,16 +11,22 @@ type UseRemoveProductDialogProps = {
 const useRemoveProductDialog = (
   props: UseRemoveProductDialogProps
 ): UseRemoveProductDialogReturn => {
+  const queryClient = useQueryClient();
+
   const {
     isPending,
     isError,
     mutate: deleteProduct,
   } = useMutation({
     mutationFn: productsService.delete,
-    onSuccess: () => {
+    onSuccess: async (_, id) => {
+      alert(id);
       toast.success("Product deleted successfully.");
       props.closeModal();
       props.onSucces();
+      await queryClient.invalidateQueries({ queryKey: ["products"] });
+      await queryClient.invalidateQueries({ queryKey: ["product"] });
+      await queryClient.removeQueries({ queryKey: ["product"] });
     },
   });
 

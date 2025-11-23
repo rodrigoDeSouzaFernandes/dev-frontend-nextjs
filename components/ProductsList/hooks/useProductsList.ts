@@ -14,7 +14,7 @@ const useProductsList = (): ProductsListResponse => {
     isLoading,
     isError,
   } = useQuery<Product[], Error>({
-    queryKey: ["product"],
+    queryKey: ["products"],
     queryFn: productsService.getAll,
     retry: 2,
     refetchOnWindowFocus: false,
