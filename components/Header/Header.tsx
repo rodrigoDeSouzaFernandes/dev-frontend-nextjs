@@ -10,8 +10,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { redirect } from "next/navigation";
-
-import { Menu } from "lucide-react";
 import { useLogout } from "@/hooks/useLogout";
 
 import userImage from "@/assets/user.webp";
@@ -24,13 +22,6 @@ export default function Header(): React.ReactElement {
     <header className="shadow-md bg-muted/70">
       <div className="max-w-[1400px] m-auto flex items-center justify-between h-16 p-4">
         <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            className="md:hidden"
-            onClick={() => alert("toggle sidebar")}
-          >
-            <Menu />
-          </Button>
           <Button
             variant="ghost"
             className="p-0 hover:bg-transparent"

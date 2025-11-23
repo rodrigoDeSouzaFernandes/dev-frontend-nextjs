@@ -4,7 +4,6 @@ import useProductsList from "./hooks/useProductsList";
 import ProductCard from "../ProductCard/ProductCard";
 import ProductsListHeader from "./ProductsListHeader";
 import CustomAlert from "../CustomAlert";
-import { Skeleton } from "../ui/skeleton";
 import ProductListSkeleton from "./ProductListSkeleton";
 
 export default function ProductsList(): React.ReactElement {
