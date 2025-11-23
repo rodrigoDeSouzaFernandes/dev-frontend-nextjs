@@ -19,8 +19,7 @@ const useRemoveProductDialog = (
     mutate: deleteProduct,
   } = useMutation({
     mutationFn: productsService.delete,
-    onSuccess: async (_, id) => {
-      alert(id);
+    onSuccess: async () => {
       toast.success("Product deleted successfully.");
       props.closeModal();
       props.onSucces();
