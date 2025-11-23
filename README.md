@@ -61,6 +61,13 @@ npm run dev
 yarn dev
 ```
 
+## 6. To login on application use these credentials:
+
+```
+Username: mor_2314
+Password: 83r5^_
+```
+
 # Available Scripts
 
 - **Build for production**
