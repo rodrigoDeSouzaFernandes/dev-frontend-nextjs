@@ -11,9 +11,9 @@ export default function ProductsListHeader(): React.ReactElement {
   );
 
   return (
-    <section className="mb-6 flex">
+    <section className="mb-6 flex flex-wrap gap-4 justify-center [@media(min-width:440px)]:justify-between ">
       <h1 className="font-bold text-5xl">Products</h1>
-      <Button className="ml-auto self-center" onClick={openCreateProductModal}>
+      <Button className="self-center" onClick={openCreateProductModal}>
         <Plus />
         Create New Product
       </Button>
