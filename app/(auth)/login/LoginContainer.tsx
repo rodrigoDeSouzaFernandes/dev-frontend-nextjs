@@ -1,10 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Tooltip } from "@/components/ui/tooltip";
-import { TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip";
+
 import LoginForm from "./LoginForm";
 import { AlertCircleIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function LoginContainer() {
   return (
@@ -20,11 +24,11 @@ export default function LoginContainer() {
 
           <div className="text-center text-sm text-muted-foreground">
             <p className="inline">Don't have an account? </p>
-            <Tooltip>
-              <TooltipTrigger>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
                 <a className="text-primary underline">Sign up</a>
-              </TooltipTrigger>
-              <TooltipContent>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="p-0">
                 <Alert className="p-4">
                   <AlertCircleIcon className="mt-1" />
                   <AlertTitle className="mb-2 text-lg">
@@ -37,8 +41,8 @@ export default function LoginContainer() {
                     <strong>Password:</strong> 83r5^_
                   </AlertDescription>
                 </Alert>
-              </TooltipContent>
-            </Tooltip>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </CardContent>
       </Card>
