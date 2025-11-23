@@ -1,14 +1,20 @@
+"use client";
 import React from "react";
 import useProductsList from "./hooks/useProductsList";
 import ProductCard from "../ProductCard/ProductCard";
-import { AlertTriangleIcon } from "lucide-react";
 import ProductsListHeader from "./ProductsListHeader";
 import CustomAlert from "../CustomAlert";
+import { Skeleton } from "../ui/skeleton";
+import ProductListSkeleton from "./ProductListSkeleton";
 
-export default async function ProductsList(): Promise<React.ReactElement> {
-  const { products, error } = await useProductsList();
+export default function ProductsList(): React.ReactElement {
+  const { products, isLoading, isError } = useProductsList();
 
-  if (error) {
+  if (isLoading) {
+    return <ProductListSkeleton />;
+  }
+
+  if (isError) {
     return (
       <div className="flex items-center gap-2">
         <CustomAlert
