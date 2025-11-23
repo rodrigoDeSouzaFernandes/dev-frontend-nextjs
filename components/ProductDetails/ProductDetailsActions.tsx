@@ -18,7 +18,7 @@ export default function ProductDetailsActions(): React.ReactElement {
   );
 
   return (
-    <div className="flex gap-3">
+    <div className="flex flex-wrap gap-3">
       <Button onClick={() => openEditProductDialog(Number(id))}>
         <Pencil className="w-4 h-4" />
         Edit Product
